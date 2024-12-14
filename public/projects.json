@@ -1,0 +1,9 @@
+[
+  {
+    "heading": "data-science-projects",
+    "projects": [
+      { "name": "project_name1", "path": "data/project1" },
+      { "name": "project_name2", "path": "data/project2" }
+    ]
+  }
+]
