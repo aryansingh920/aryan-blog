@@ -7,5 +7,19 @@ interface ProjectSection {
   heading: string;
   projects: Project[];
 }
+// src/types/types.ts
+export interface PageProps {
+  params: {
+    slug: string;
+  };
+}
 
-export type { Project, ProjectSection };
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+
+// src/types/types.ts
+
+export type { Project, ProjectSection, Params };
