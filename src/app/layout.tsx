@@ -1,4 +1,5 @@
 import Sidebar from "@/app/components/Sidebar";
+import Footer from "@/app/components/Footer"; // Import the Footer component
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -23,8 +24,11 @@ export default function RootLayout({
         {/* Sidebar fixed */}
         <Sidebar />
 
-        {/* Scrollable main content */}
-        <main className="flex-1 overflow-y-auto p-6 ml-80">{children}</main>
+        {/* Scrollable main content with footer */}
+        <main className="flex-1 overflow-y-auto p-6 ml-80 flex flex-col">
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </main>
       </body>
     </html>
   );

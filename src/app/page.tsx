@@ -10,6 +10,7 @@ interface Project {
     time: string;
     date: string;
   };
+  author: string;
 }
 
 interface ProjectSection {
@@ -61,6 +62,7 @@ export default function Home() {
             <p className="text-gray-600">
               Added On: {project.addedOn.date} at {project.addedOn.time}
             </p>
+            <p className="text-gray-600">Author: {project.author}</p>
           </Link>
         ))}
       </div>
