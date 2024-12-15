@@ -1,9 +1,15 @@
 [
   {
-    "heading": "data-science-projects",
+    "heading": "Data-Science-Projects",
     "projects": [
-      { "name": "project_name1", "path": "data/project1" },
-      { "name": "project_name2", "path": "data/project2" }
+      {
+        "name": "3D-Earth-Viewer-Data-Visualization",
+        "path": "data/dataVizProject",
+        "addedOn": {
+          "time": "21:29",
+          "date": "15/12/2024"
+        }
+      }
     ]
   }
 ]

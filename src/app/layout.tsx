@@ -19,9 +19,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="flex">
+      <body className="flex h-screen">
+        {/* Sidebar fixed */}
         <Sidebar />
-        <main className="flex-1 bg-gray-100 p-4">{children}</main>
+
+        {/* Scrollable main content */}
+        <main className="flex-1 overflow-y-auto p-6 ml-80">{children}</main>
       </body>
     </html>
   );
