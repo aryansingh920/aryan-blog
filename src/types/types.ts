@@ -1,25 +1,16 @@
-interface Project {
+// src/types/types.ts
+
+export type PageProps = {
+  params: Record<string, string>;
+};
+
+
+export interface Project {
   name: string;
   path: string;
 }
 
-interface ProjectSection {
+export interface ProjectSection {
   heading: string;
   projects: Project[];
 }
-// src/types/types.ts
-export interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-type Params = {
-  params: {
-    slug: string;
-  };
-};
-
-// src/types/types.ts
-
-export type { Project, ProjectSection, Params };
