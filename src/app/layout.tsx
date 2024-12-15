@@ -20,7 +20,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="flex h-screen">
+      <body
+        style={{
+          backgroundImage: "url('./background.jpg')",
+        }}
+        className="flex h-screen"
+      >
         {/* Sidebar fixed */}
         <Sidebar />
 
