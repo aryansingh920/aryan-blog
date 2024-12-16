@@ -11,6 +11,16 @@
           "time": "21:29",
           "date": "15/12/2024"
         }
+      },
+      {
+        "id": 2,
+        "name": "CAPTCHA-Recognition-Project",
+        "path": "data/captcha_guess",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "18:18",
+          "date": "16/12/2024"
+        }
       }
     ]
   }
