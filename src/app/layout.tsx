@@ -1,10 +1,9 @@
-import Sidebar from "@/app/components/Sidebar";
-import Footer from "@/app/components/Footer"; // Import the Footer component
+import DynamicLayout from "@/app/components/DynamicLayout";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "Project Blog",
-  description: "A blog page with dynamic routing and sidebar",
+  title: "Aryan's Blog",
+  description: "Aryan's blog page",
 };
 
 export default function RootLayout({
@@ -21,19 +20,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        style={{
-          backgroundImage: "url('./background.jpg')",
-        }}
-        className="flex h-screen"
+        style={{ backgroundImage: "url('./background.jpg')" }}
+        className="h-screen"
       >
-        {/* Sidebar fixed */}
-        <Sidebar />
-
-        {/* Scrollable main content with footer */}
-        <main className="flex-1 overflow-y-auto p-6 ml-80 flex flex-col">
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </main>
+        <DynamicLayout>{children}</DynamicLayout>
       </body>
     </html>
   );

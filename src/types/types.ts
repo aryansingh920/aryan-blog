@@ -6,8 +6,14 @@ export type PageProps = {
 
 
 export interface Project {
+  id: number;
   name: string;
   path: string;
+  addedOn: {
+    time: string;
+    date: string;
+  };
+  author: string;
 }
 
 export interface ProjectSection {

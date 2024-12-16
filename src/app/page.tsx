@@ -2,21 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Project, ProjectSection } from "@/types/types";
 
-interface Project {
-  name: string;
-  path: string;
-  addedOn: {
-    time: string;
-    date: string;
-  };
-  author: string;
-}
 
-interface ProjectSection {
-  heading: string;
-  projects: Project[];
-}
+
+
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);

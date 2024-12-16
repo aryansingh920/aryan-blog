@@ -3,6 +3,7 @@
     "heading": "Data-Science-Projects",
     "projects": [
       {
+        "id": 1,
         "name": "3D-Earth-Viewer-Data-Visualization",
         "path": "data/dataVizProject",
         "author": "Aryan Singh",
