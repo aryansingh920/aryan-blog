@@ -20,7 +20,9 @@ export default function MobileNavbar() {
       {/* Navbar Header */}
       <div className="flex items-center justify-between p-4">
         <h1 className="text-lg font-bold">
-          <Link href="/">Home</Link>
+          <Link href="/">
+            🏠 <u>Home</u>
+          </Link>
         </h1>
         <button
           onClick={() => setIsOpen(!isOpen)}

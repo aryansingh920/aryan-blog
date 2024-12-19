@@ -25,7 +25,9 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <div className="flex items-center justify-between p-4">
         <span className={`text-lg font-bold ${isCollapsed && "hidden"}`}>
-          <Link href="/">Home</Link>
+          <Link href="/">
+            🏠 <u>Home</u>
+          </Link>
         </span>
         {/* <button
           onClick={() => setIsCollapsed(!isCollapsed)}

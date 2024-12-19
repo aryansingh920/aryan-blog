@@ -3,23 +3,88 @@
     "heading": "Data-Science-Projects",
     "projects": [
       {
-        "id": 1,
-        "name": "3D-Earth-Viewer-Data-Visualization",
-        "path": "data/dataVizProject",
+        "id": 6,
+        "name": "Genetic-Sequence-Analysis-and-RNA-Codon-Visualization",
+        "path": "data/project6",
         "author": "Aryan Singh",
         "addedOn": {
-          "time": "21:29",
-          "date": "15/12/2024"
+          "time": "14:42",
+          "date": "14/12/2024"
         }
       },
       {
         "id": 2,
         "name": "CAPTCHA-Recognition-Project",
-        "path": "data/captcha_guess",
+        "path": "data/project2",
         "author": "Aryan Singh",
         "addedOn": {
           "time": "18:18",
           "date": "16/12/2024"
+        }
+      },
+      {
+        "id": 1,
+        "name": "3D-Earth-Viewer-Data-Visualization",
+        "path": "data/project1",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "21:29",
+          "date": "15/12/2024"
+        }
+      }
+    ]
+  },
+  {
+    "heading": "Quantitative-Projects",
+    "projects": [
+      {
+        "id": 8,
+        "name": "MarketPulse-Sentiment-Driven-Market-Movement-Predictor",
+        "path": "data/project8",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "00:46",
+          "date": "21/12/2024"
+        }
+      },
+      {
+        "id": 7,
+        "name": "Monte-Carlo-Portfolio-Risk-Optimization",
+        "path": "data/project7",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "15:26",
+          "date": "20/12/2024"
+        }
+      },
+      {
+        "id": 5,
+        "name": "Portfolio-Optimization-Monte-Carlo-Simulated-Annealing-Genetic-Algorithm-Particle-Swarm-Optimization",
+        "path": "data/project5",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "23:51",
+          "date": "18/12/2024"
+        }
+      },
+      {
+        "id": 4,
+        "name": "Momentum-Based-Algorithmic-Trading-Strategy-Using-Candlestick-Patterns",
+        "path": "data/project4",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "11:21",
+          "date": "19/12/2024"
+        }
+      },
+      {
+        "id": 3,
+        "name": "Pairs-Trading-with-Order-Book-Visualization",
+        "path": "data/project3",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "21:40",
+          "date": "17/12/2024"
         }
       }
     ]
