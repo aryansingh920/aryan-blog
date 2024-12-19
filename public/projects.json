@@ -4,7 +4,7 @@
     "projects": [
       {
         "id": 10,
-        "name": "CIFAR-10 Image Recognition Using Convolutional Neural Networks",
+        "name": "CIFAR-10-Image-Recognition-Using-Convolutional-Neural-Networks",
         "path": "data/project10",
         "author": "Aryan Singh",
         "addedOn": {
@@ -14,7 +14,7 @@
       },
       {
         "id": 9,
-        "name": "Face Recognition System Using FaceNet and MTCNN",
+        "name": "Face-Recognition-System-Using-FaceNet-and-MTCNN",
         "path": "data/project9",
         "author": "Aryan Singh",
         "addedOn": {
@@ -114,7 +114,7 @@
     "projects": [
       {
         "id": 11,
-        "name": "Whale Tracking: Secure Satellite Communication Using the Bobb Protocol",
+        "name": "Whale-Tracking-Secure-Satellite-Communication-Using-the-Bobb-Protocol",
         "path": "data/project11",
         "author": "Aryan Singh",
         "addedOn": {

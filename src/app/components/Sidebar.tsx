@@ -41,25 +41,29 @@ export default function Sidebar() {
 
       {!isCollapsed ? (
         <nav className="flex-1 px-4 space-y-4 overflow-y-auto">
-          {projects.map((section: ProjectSection) => (
-            <div key={section.heading}>
-              <h2 className="text-sm font-semibold uppercase text-gray-400">
-                {section.heading.replace("-", " ")}
-              </h2>
-              <ul className="space-y-1 mt-2">
-                {section.projects.map((project: Project) => (
-                  <li key={project.id}>
-                    <Link
-                      href={`/blog/${project.name}`}
-                      className="block px-4 py-2 rounded hover:bg-gray-700"
-                    >
-                      {project.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {projects
+            .sort(() => Math.random() - 0.5)
+            .map((section: ProjectSection) => (
+              <div key={section.heading}>
+                <h2 className="text-sm font-semibold uppercase text-gray-400">
+                  {section.heading.replace("-", " ")}
+                </h2>
+                <ul className="space-y-1 mt-2">
+                  {section.projects
+                    .sort(() => Math.random() - 0.5)
+                    .map((project: Project) => (
+                      <li key={project.id}>
+                        <Link
+                          href={`/blog/${project.name}`}
+                          className="block px-4 py-2 rounded hover:bg-gray-700"
+                        >
+                          {project.name}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
         </nav>
       ) : (
         <nav className="flex-1 px-4 space-y-4 overflow-y-auto">
