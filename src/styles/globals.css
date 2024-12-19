@@ -19,3 +19,17 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+footer {
+  /* From https://css.glass */
+  padding: 1rem;
+  background: rgba(0, 17, 40, 0.86) !important;
+  /* border-radius: 16px !important; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(5.1px) !important;
+  -webkit-backdrop-filter: blur(5.1px) !important;
+}
+
+
+
+

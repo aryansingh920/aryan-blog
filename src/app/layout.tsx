@@ -1,6 +1,6 @@
 import DynamicLayout from "@/app/components/DynamicLayout";
 import "@/styles/globals.css";
-
+// import { background } from "../../public/background.gif";
 export const metadata = {
   title: "Aryan's Blog",
   description: "Aryan's blog page",
@@ -20,10 +20,19 @@ export default function RootLayout({
         />
       </head>
       <body
-        style={{ backgroundImage: "url('./background.jpg')" }}
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 35%, rgba(189,189,189,1) 100%)",
+        }}
         className="h-screen"
       >
-        <DynamicLayout>{children}</DynamicLayout>
+        <div
+          style={{
+            overflowY: "auto",
+          }}
+        >
+          <DynamicLayout>{children}</DynamicLayout>
+        </div>
       </body>
     </html>
   );
