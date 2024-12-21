@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fine-Tuning GPT-2 for Financial News and Analysis Text Generation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            /* From https://css.glass */
+            /* From https://css.glass */
+            background: rgba(0, 17, 40, 0.86);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5.1px);
+            -webkit-backdrop-filter: blur(5.1px);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        section {
+            /* From https://css.glass */
+            /* From https://css.glass */
+            /* From https://css.glass */
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5.6px);
+            -webkit-backdrop-filter: blur(5.6px);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 900px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        img,
+        video {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        code {
+            background-color: #f8f8f8;
+            padding: 2px 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <header>
+        <h1>Fine-Tuning GPT-2 for Financial News and Analysis Text Generation</h1>
+        <p>A Comprehensive Guide to Building a Financial News Generator Using GPT-2</p>
+    </header>
+
+    <section>
+        <h2>Introduction</h2>
+        <p>
+            This project focuses on fine-tuning <strong>GPT-2</strong>, an advanced language model, to generate coherent and contextually relevant financial news articles. By leveraging the power of transfer learning, we create a system that can analyze and produce financial news headlines and summaries tailored to specific stock tickers or general market updates.
+        </p>
+        <p>
+            GitHub Repository: <a href="https://github.com/aryansingh920/Fine-Tuning-GPT-2-for-Financial-News-and-Analysis-Text-Generation" target="_blank">Fine-Tuning GPT-2</a>
+        </p>
+    </section>
+
+    <section>
+        <h2>Technical Workflow</h2>
+
+        <h3>1. Data Preparation</h3>
+        <p>
+            The project begins by collecting financial news data using the <code>getData.py</code> script. It fetches news articles from Yahoo Finance for a list of stock tickers, extracting key details such as title, summary, description, publication date, and provider.
+        </p>
+        <ul>
+            <li>Data is read from a CSV file containing stock ticker symbols.</li>
+            <li>News articles are fetched using the Yahoo Finance API.</li>
+            <li>Processed data is stored in a CSV file for further use in model fine-tuning.</li>
+        </ul>
+        <img src="https://res.cloudinary.com/ddodpfjxe/image/upload/v1734739333/project12/zrknjj6ohjuzfplrsiud.png" alt="Dataset Preparation Screenshot">
+
+        <h3>2. Fine-Tuning GPT-2</h3>
+        <p>
+            The <code>prepare_fineTuning.py</code> script fine-tunes GPT-2 on the prepared dataset. The process involves the following steps:
+        </p>
+        <ul>
+            <li>Converting the CSV data into a text format compatible with GPT-2 training.</li>
+            <li>Using the Hugging Face <code>Trainer</code> API to fine-tune the model.</li>
+            <li>Saving the fine-tuned model and tokenizer for later use.</li>
+        </ul>
+        <img src="https://res.cloudinary.com/ddodpfjxe/image/upload/v1734739334/project12/z7oi85l2hsngyxstjnwa.png" alt="Fine-Tuning Process Screenshot">
+
+        <h3>3. Generating Financial News</h3>
+        <p>
+            The <code>main.py</code> script implements the <code>FinancialGPT2Generator</code> class. It loads the fine-tuned model and generates news articles based on user input. Users can specify:
+        </p>
+        <ul>
+            <li>A specific stock ticker to generate news for.</li>
+            <li>Text generation parameters such as maximum length and temperature.</li>
+        </ul>
+        <img src="https://res.cloudinary.com/ddodpfjxe/image/upload/v1734739334/project12/ivxrpe9xom2ccfbithyj.png" alt="Text Generation Screenshot">
+
+        <h3>4. Streamlit Application</h3>
+        <p>
+            The <code>app.py</code> script provides a user-friendly interface for interacting with the model. Built with Streamlit, the app allows users to:
+        </p>
+        <ul>
+            <li>Select random news generation or input specific stock tickers.</li>
+            <li>Adjust generation parameters dynamically.</li>
+            <li>Generate financial news headlines and summaries with a single click.</li>
+        </ul>
+        <img src="https://res.cloudinary.com/ddodpfjxe/image/upload/v1734739334/project12/nueirbsesnzs6yrnrado.png" alt="Streamlit App Screenshot">
+    </section>
+
+    <section>
+        <h2>Results and Analysis</h2>
+        <p>
+            The fine-tuned model performs exceptionally well in generating coherent and contextually accurate financial news. Key observations include:
+        </p>
+        <ul>
+            <li>High relevance to specific stock tickers or general market conditions.</li>
+            <li>Flexible text generation, controlled by parameters like temperature and length.</li>
+            <li>Smooth real-time interaction through the Streamlit application.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>How to Run the Project</h2>
+        <ol>
+            <li>Clone the repository from <a href="https://github.com/aryansingh920/Fine-Tuning-GPT-2-for-Financial-News-and-Analysis-Text-Generation" target="_blank">GitHub</a>.</li>
+            <li>Prepare the dataset by running <code>getData.py</code>.</li>
+            <li>Fine-tune the model using <code>prepare_fineTuning.py</code>.</li>
+            <li>Run the Streamlit app with <code>streamlit run app.py</code>.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>GitHub Repository</h2>
+        <p>
+            Access the complete project code and instructions here:
+            <a href="https://github.com/aryansingh920/Fine-Tuning-GPT-2-for-Financial-News-and-Analysis-Text-Generation" target="_blank">Fine-Tuning GPT-2</a>
+        </p>
+    </section>
+
+    <footer>
+        <p>Developed with a passion for deep learning and financial analysis. Explore more projects on
+            <a href="https://github.com/aryansingh920/" target="_blank">GitHub</a>.
+        </p>
+    </footer>
+</body>
+
+
+
+
+
+
+
+
+</html>
