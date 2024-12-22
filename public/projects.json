@@ -123,5 +123,20 @@
         }
       }
     ]
+  },
+  {
+    "heading": "Gen-AI-Projects",
+    "projects": [
+      {
+        "id": 12,
+        "name": "Fine-Tuning-GPT-2-for-Financial-News-and-Analysis-Text-Generation",
+        "path": "data/project12",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "00:16",
+          "date": "21/12/2024"
+        }
+      }
+    ]
   }
 ]
