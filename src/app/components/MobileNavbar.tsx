@@ -43,7 +43,14 @@ export default function MobileNavbar() {
   }, []);
 
   return (
-    <nav className="bg-gray-800 text-white">
+    <nav
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+      }}
+      className="bg-gray-800 text-white opacity-90"
+    >
       {/* Navbar Header */}
       <div className="flex items-center justify-between p-4">
         <h1 className="text-lg font-bold">
