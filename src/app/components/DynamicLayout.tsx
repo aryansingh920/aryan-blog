@@ -11,6 +11,7 @@ export default function DynamicLayout({
   children: React.ReactNode;
 }) {
   const [isMobile, setIsMobile] = useState(false);
+  const [noSidebar, setNoSidebar] = useState(false);
 
   useEffect(() => {
     const checkViewport = () => setIsMobile(window.innerWidth < 768);
@@ -37,6 +38,12 @@ export default function DynamicLayout({
 
         starfield.appendChild(star);
       }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window.location.search.includes("noSidebar")) {
+      setNoSidebar(true);
     }
   }, []);
 
@@ -87,7 +94,7 @@ export default function DynamicLayout({
       <div className="flex h-screen relative">
         {isMobile ? (
           <div className="w-full">
-            <MobileNavbar />
+            {!noSidebar && <MobileNavbar />}
             <div className="flex-1 overflow-y-auto p-0">
               {children}
               <Footer />
@@ -95,8 +102,12 @@ export default function DynamicLayout({
           </div>
         ) : (
           <>
-            <Sidebar />
-            <div className="flex-1 overflow-y-auto ml-80 flex flex-col">
+            {!noSidebar && <Sidebar />}
+            <div
+              className={`flex-1 overflow-y-auto ${
+                !noSidebar && "ml-80"
+              } flex flex-col`}
+            >
               <div className="flex-1">{children}</div>
               <Footer />
             </div>
