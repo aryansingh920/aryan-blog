@@ -1,3 +1,4 @@
+// import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 interface CarouselProps {
@@ -56,13 +57,15 @@ const Carousel: React.FC<CarouselProps> = ({
       >
         {iframes.map((src, idx) => (
           <div key={idx} className="w-full flex-shrink-0">
+            {/* <Link href={src}> */}
             <iframe
               src={src}
               title={`iframe-${idx}`}
-              className="w-full h-56 md:h-96"
+              className="w-full h-60 md:h-96"
               frameBorder="0"
               allowFullScreen
             />
+            {/* </Link> */}
           </div>
         ))}
       </div>

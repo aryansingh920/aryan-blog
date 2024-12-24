@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
 import Carousel from "./components/Caraousel";
-
+import AboutMe from "./components/AboutMe";
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -94,7 +94,9 @@ export default function Home() {
       }
     >
       <section>
-        <h1 className="text-3xl font-bold mb-1 mt-1">Today`s Famous</h1>
+        <h1 className="text-3xl font-bold mb-1 mt-1">
+          Trending Reads of the Day
+        </h1>
         <div className="flex flex-col items-center justify-center   ">
           {/* <h1 className="text-2xl font-bold mb-8">Iframe Carousel Example</h1> */}
           <div className="w-full ">
@@ -104,7 +106,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h1 className="text-3xl font-bold mb-1 mt-1">All Blogs</h1>
+        <h1 className="text-3xl font-bold mb-1 mt-1">Full Blog Archive</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {shuffledProjects
@@ -123,6 +125,13 @@ export default function Home() {
               </Link>
             ))}
         </div>
+      </section>
+
+      <section>
+        <Link href="#about">
+          <AboutMe />
+        </Link>
+        {/* <h1 className="text-3xl font-bold mb-1 mt-1">About Me</h1> */}
       </section>
     </main>
   );

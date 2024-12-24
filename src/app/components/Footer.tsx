@@ -29,7 +29,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="hover:text-white transition"
           >
-            <i className="material-icons">code</i> GitHub
+            <i className="fab fa-github"></i> GitHub
           </a>
           <a
             href="https://www.linkedin.com/in/aryan-singh-axone125/"
@@ -37,15 +37,15 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="hover:text-white transition"
           >
-            <i className="material-icons">work</i> LinkedIn
+            <i className="fab fa-linkedin"></i> LinkedIn
           </a>
           <a
-            href="https://www.instagram.com/aryansingh_20/"
+            href="mailto:contact.aryansingh920@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition"
           >
-            <i className="material-icons">chat</i> Instagram
+            <i className="fas fa-envelope"></i> Email
           </a>
         </div>
 
