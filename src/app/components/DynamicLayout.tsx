@@ -46,7 +46,7 @@ export default function DynamicLayout({
       <div
         id="starfield"
         style={{
-          position: "absolute",
+          position: "fixed",
           width: "100%",
           height: "100%",
           overflow: "hidden",
