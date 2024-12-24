@@ -109,7 +109,8 @@ export default function DynamicLayout({
               } flex flex-col`}
             >
               <div className="flex-1">{children}</div>
-              <Footer />
+
+              {!noSidebar && <Footer />}
             </div>
           </>
         )}

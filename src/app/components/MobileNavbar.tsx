@@ -10,6 +10,14 @@ export default function MobileNavbar() {
   const [shuffledProjects, setShuffledProjects] = useState<ProjectSection[]>(
     []
   );
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    // Fetch the projects JSON file
+    fetch("/projects.json")
+      .then((res) => res.json())
+      .then((data) => setProjects(data));
+  }, []);
 
   useEffect(() => {
     const sP = projects.sort(() => {
@@ -18,7 +26,7 @@ export default function MobileNavbar() {
         today.getFullYear() * 10000 +
         (today.getMonth() + 1) * 100 +
         today.getDate();
-      // const seed = 20241225;
+      // const seed = 20241225; // Example of a fixed seed for debugging
 
       // A simple seeded random number generator function
       const seededRandom = (seed: number) => {
@@ -35,12 +43,16 @@ export default function MobileNavbar() {
     setShuffledProjects(sP);
   }, [projects]);
 
-  useEffect(() => {
-    // Fetch the projects JSON file
-    fetch("/projects.json")
-      .then((res) => res.json())
-      .then((data) => setProjects(data));
-  }, []);
+  // Filter sections and projects based on search term
+  const filteredProjects = shuffledProjects
+    .map((section) => {
+      const filteredItems = section.projects.filter((project) =>
+        project.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      return { ...section, projects: filteredItems };
+    })
+    // Filter out sections that have no matching projects
+    .filter((section) => section.projects.length > 0);
 
   return (
     <nav
@@ -69,33 +81,43 @@ export default function MobileNavbar() {
       {/* Collapsible Menu */}
       {isOpen && (
         <div className="bg-gray-900 p-4">
-          {/* Render Headings and Projects */}
-          {shuffledProjects
-            // .sort(() => Math.random() - 0.5)
-            .map((section: ProjectSection) => (
-              <div key={section.heading} className="mb-4">
-                {/* Heading */}
-                <h2 className="text-sm font-semibold uppercase text-gray-400 mb-2">
-                  {section.heading.replace("-", " ")}
-                </h2>
+          {/* Search Bar */}
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search by name"
+              className="w-full px-2 py-1 rounded bg-gray-700 
+                         text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 
+                         focus:ring-gray-500"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
-                {/* Projects */}
-                <ul className="space-y-1">
-                  {section.projects
-                    // .sort(() => Math.random() - 0.5)
-                    .map((project: Project) => (
-                      <li key={project.id}>
-                        <Link
-                          href={`/blog/${project.name}`}
-                          className="block px-4 py-2 rounded hover:bg-gray-700"
-                        >
-                          {project.name}
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            ))}
+          {/* Render filtered sections and projects */}
+          {filteredProjects.map((section: ProjectSection) => (
+            <div key={section.heading} className="mb-4">
+              {/* Heading */}
+              <h2 className="text-sm font-semibold uppercase text-gray-400 mb-2">
+                {section.heading.replace("-", " ")}
+              </h2>
+
+              {/* Projects */}
+              <ul className="space-y-1">
+                {section.projects.map((project: Project) => (
+                  <li key={project.id}>
+                    <Link
+                      href={`/blog/${project.name}`}
+                      className="block px-4 py-2 rounded hover:bg-gray-700"
+                    >
+                      {project.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       )}
     </nav>
