@@ -61,29 +61,62 @@ export default function Home() {
     fetch("/projects.json")
       .then((res) => res.json())
       .then((data: ProjectSection[]) => {
-        // Flatten the projects and sort them in descending order by time and date
-        const sortedProjects = data
-          .flatMap((section) => section.projects)
-          .sort((a, b) => {
-            const dateA = new Date(
-              a.addedOn.date.split("/").reverse().join("-") +
-                " " +
-                a.addedOn.time
-            );
-            const dateB = new Date(
-              b.addedOn.date.split("/").reverse().join("-") +
-                " " +
-                b.addedOn.time
-            );
-            return dateB.getTime() - dateA.getTime(); // Descending order
-          });
+        // Flatten the projects and include the heading for each project
+        const enrichedProjects = data.flatMap((section) =>
+          section.projects.map((project) => ({
+            ...project,
+            heading: section.heading, // Add the heading from the section
+          }))
+        );
+
+        // Sort the enriched projects in descending order by time and date
+        const sortedProjects = enrichedProjects.sort((a, b) => {
+          const dateA = new Date(
+            a.addedOn.date.split("/").reverse().join("-") + " " + a.addedOn.time
+          );
+          const dateB = new Date(
+            b.addedOn.date.split("/").reverse().join("-") + " " + b.addedOn.time
+          );
+          return dateB.getTime() - dateA.getTime(); // Descending order
+        });
+
+        // console.log("sortedProjects", sortedProjects);
 
         setProjects(sortedProjects);
-        // const shuffledProjects = projects.sort(() => Math.random() - 0.5);
-        // setProjects(shuffledProjects);
       })
       .catch((error) => console.error("Error fetching projects:", error));
   }, []);
+
+  // useEffect(() => {
+  //   fetch("/projects.json")
+  //     .then((res) => res.json())
+  //     .then((data: ProjectSection[]) => {
+  //       // console.log("data", data.heading);
+  //       // Flatten the projects and sort them in descending order by time and date
+  //       const sortedProjects = data
+  //         .flatMap((section) => section.projects)
+  //         .sort((a, b) => {
+  //           const dateA = new Date(
+  //             a.addedOn.date.split("/").reverse().join("-") +
+  //               " " +
+  //               a.addedOn.time
+  //           );
+  //           const dateB = new Date(
+  //             b.addedOn.date.split("/").reverse().join("-") +
+  //               " " +
+  //               b.addedOn.time
+  //           );
+  //           return dateB.getTime() - dateA.getTime(); // Descending order
+  //         });
+
+  //       console.log("sortedProjects", sortedProjects);
+
+  //       setProjects(sortedProjects);
+  //       // const shuffledProjects = projects.sort(() => Math.random() - 0.5);
+  //       // setProjects(shuffledProjects);
+  //     })
+  //     .catch((error) => console.error("Error fetching projects:", error));
+  // }, []);
 
   return (
     <main
@@ -117,11 +150,35 @@ export default function Home() {
                 href={`/blog/${project.name}`}
                 className="block p-4 rounded-lg shadow hover:shadow-md transition-shadow card"
               >
-                <h2 className="text-xl font-semibold mb-2">{project.name}</h2>
-                <p className="text-gray-600">
+                <h2 className="text-xl font-semibold mb-2">
+                  {project.name.replace(/-/g, " ")}
+                </h2>
+
+                <p
+                  style={{
+                    textAlign: "left",
+                  }}
+                  className="text-gray-700"
+                >
+                  <>{project.heading?.replace(/-/g, " ")}</>
+                </p>
+
+                <p
+                  style={{
+                    textAlign: "left",
+                  }}
+                  className="text-gray-500"
+                >
                   Added On: {project.addedOn.date} at {project.addedOn.time}
                 </p>
-                <p className="text-gray-600">Author: {project.author}</p>
+                <p
+                  style={{
+                    textAlign: "left",
+                  }}
+                  className="text-gray-500"
+                >
+                  Author: {project.author}
+                </p>
               </Link>
             ))}
         </div>
