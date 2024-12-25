@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
-import Carousel from "./components/Caraousel";
+// import Carousel from "./components/Caraousel";
 import AboutMe from "./components/AboutMe";
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   const [isMobile, setIsMobile] = useState(false);
   const [shuffledProjects, setShuffledProjects] = useState<Project[]>([]);
-  const [iframeSources, setIframeSources] = useState<string[]>([]);
+  // const [iframeSources, setIframeSources] = useState<string[]>([]);
 
   // const iframeSources = [
   //   "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -48,13 +48,13 @@ export default function Home() {
     });
     setShuffledProjects(sP);
 
-    const links = sP
-      .map((project) => `blog/${project.name}?noSidebar`)
-      .reverse()
-      .slice(0, 5);
+    // const links = sP
+    // .map((project) => `blog/${project.name}?noSidebar`)
+    // .reverse()
+    // .slice(0, 5);
     // console.log(links);
     // setIframeSources(shuffledProjects.slice(0, 3));
-    setIframeSources(links);
+    // setIframeSources(links);
   }, [projects, shuffledProjects]);
 
   useEffect(() => {
@@ -126,17 +126,16 @@ export default function Home() {
           : "pl-6 pt-6 min-h-screen mainPage"
       }
     >
-      <section>
+      {/* <section>
         <h1 className="text-3xl font-bold mb-1 mt-1">
           Trending Reads of the Day
         </h1>
         <div className="flex flex-col items-center justify-center   ">
-          {/* <h1 className="text-2xl font-bold mb-8">Iframe Carousel Example</h1> */}
           <div className="w-full ">
             <Carousel iframes={iframeSources} />
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section>
         <h1 className="text-3xl font-bold mb-1 mt-1">Full Blog Archive</h1>
