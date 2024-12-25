@@ -111,7 +111,7 @@ export default function MobileNavbar() {
                       href={`/blog/${project.name}`}
                       className="block px-4 py-2 rounded hover:bg-gray-700"
                     >
-                      {project.name}
+                      {project.name.replace(/-/g, " ")}
                     </Link>
                   </li>
                 ))}
