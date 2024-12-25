@@ -14,6 +14,7 @@ export interface Project {
     date: string;
   };
   author: string;
+  heading?: string; // Optional property
 }
 
 export interface ProjectSection {
