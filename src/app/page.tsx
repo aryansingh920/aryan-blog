@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import seedrandom from "seedrandom";
 import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
 // import Carousel from "./components/Caraousel";
 import AboutMe from "./components/AboutMe";
+
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -80,12 +82,55 @@ export default function Home() {
           return dateB.getTime() - dateA.getTime(); // Descending order
         });
 
-        // console.log("sortedProjects", sortedProjects);
+        // Get the seed based on the current date (YYYY-MM-DD)
+        const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
+        // const today = "2024-12-29";
+        // console.log("today", today);
+        const rng = seedrandom(today);
+
+        // Fisher-Yates shuffle with a seeded random number generator
+        for (let i = sortedProjects.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1)); // Generate a random index
+          [sortedProjects[i], sortedProjects[j]] = [
+            sortedProjects[j],
+            sortedProjects[i],
+          ]; // Swap
+        }
 
         setProjects(sortedProjects);
       })
       .catch((error) => console.error("Error fetching projects:", error));
   }, []);
+
+  // useEffect(() => {
+  //   fetch("/projects.json")
+  //     .then((res) => res.json())
+  //     .then((data: ProjectSection[]) => {
+  //       // Flatten the projects and include the heading for each project
+  //       const enrichedProjects = data.flatMap((section) =>
+  //         section.projects.map((project) => ({
+  //           ...project,
+  //           heading: section.heading, // Add the heading from the section
+  //         }))
+  //       );
+
+  //       // Sort the enriched projects in descending order by time and date
+  //       const sortedProjects = enrichedProjects.sort((a, b) => {
+  //         const dateA = new Date(
+  //           a.addedOn.date.split("/").reverse().join("-") + " " + a.addedOn.time
+  //         );
+  //         const dateB = new Date(
+  //           b.addedOn.date.split("/").reverse().join("-") + " " + b.addedOn.time
+  //         );
+  //         return dateB.getTime() - dateA.getTime(); // Descending order
+  //       });
+
+  //       // console.log("sortedProjects", sortedProjects);
+
+  //       setProjects(sortedProjects);
+  //     })
+  //     .catch((error) => console.error("Error fetching projects:", error));
+  // }, []);
 
   // useEffect(() => {
   //   fetch("/projects.json")
@@ -142,6 +187,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {shuffledProjects
+            .reverse()
             // .sort(() => Math.random() - 0.5)
             .map((project) => (
               <Link
