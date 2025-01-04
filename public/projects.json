@@ -181,6 +181,16 @@
           "time": "00:49",
           "date": "24/12/2024"
         }
+      },
+      {
+        "id": 17,
+        "name": "The-Origins-and-Journey-of-Life-From-Earth-to-the-Cosmos",
+        "path": "data/project17",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "01:30",
+          "date": "04/01/2025"
+        }
       }
     ]
   }
