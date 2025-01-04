@@ -211,6 +211,16 @@
           "time": "02:27",
           "date": "02/01/2025"
         }
+      },
+      {
+        "id": 20,
+        "name": "Exploring-the-Paranormal-Ghosts-Dimensions-and-the-Afterlife",
+        "path": "data/project20",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "02:44",
+          "date": "04/01/2025"
+        }
       }
     ]
   }
