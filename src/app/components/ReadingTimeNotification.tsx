@@ -30,7 +30,7 @@ const ReadingTimeNotification: React.FC<ReadingTimeNotificationProps> = ({
     setReadingTime(time);
 
     // Hide notification after 4-5 seconds
-    const timer = setTimeout(() => setShowNotification(false), 5000);
+    const timer = setTimeout(() => setShowNotification(false), 8000);
 
     return () => clearTimeout(timer); // Cleanup
   }, [htmlContent]);
