@@ -108,6 +108,7 @@ export default function MobileNavbar() {
                 {section.projects.map((project: Project) => (
                   <li key={project.id}>
                     <Link
+                      onClick={() => setIsOpen(false)}
                       href={`/blog/${project.name}`}
                       className="block px-4 py-2 rounded hover:bg-gray-700"
                     >
