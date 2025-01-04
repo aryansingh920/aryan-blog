@@ -60,3 +60,8 @@ footer {
   margin-bottom: 1.5rem;
   padding: 1%;
 }
+
+.html-content section a{
+  color: blue;
+  text-decoration: underline;
+}

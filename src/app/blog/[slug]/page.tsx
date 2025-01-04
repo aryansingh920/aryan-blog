@@ -66,7 +66,7 @@ export default function BlogPage(props: unknown) {
     }
 
     return (
-      <div className="">
+      <div className="html-content">
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </div>
     );
