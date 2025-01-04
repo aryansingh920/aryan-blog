@@ -51,6 +51,16 @@
           "time": "21:29",
           "date": "15/12/2024"
         }
+      },
+      {
+        "id": 16,
+        "name": "Object-Detection-for-Autonomous-Vehicles",
+        "path": "data/project16",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "01:12",
+          "date": "04/01/2025"
+        }
       }
     ]
   },
