@@ -10,7 +10,7 @@ export default function DynamicLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const [noSidebar, setNoSidebar] = useState(false);
 
   useEffect(() => {
