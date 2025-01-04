@@ -231,7 +231,7 @@ export default function Home() {
 
       <section>
         <Link href="#about">
-          <AboutMe />
+          <AboutMe isMobile={isMobile} />
         </Link>
         {/* <h1 className="text-3xl font-bold mb-1 mt-1">About Me</h1> */}
       </section>

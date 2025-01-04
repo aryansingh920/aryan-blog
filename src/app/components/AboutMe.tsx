@@ -2,11 +2,19 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const AboutMe: React.FC = () => {
+//add props isMobile:Boolean to the function
+// const AboutMe: React.FC =
+interface AboutMeProps {
+  isMobile: boolean;
+  // <div id="about" style={{ ...styles.container, padding: isMobile ? '10px' : '20px' }}>
+}
+const AboutMe: React.FC<AboutMeProps> = ({ isMobile }:AboutMeProps) => {
   return (
     <div id="about" style={styles.container}>
       <h2 style={styles.header}>About Me</h2>
-      <div style={styles.row}>
+      <div
+        style={{ ...styles.row, flexDirection: isMobile ? "column" : "row" }}
+      >
         <img
           src="./profile.jpeg"
           alt="Your Profile Picture"
