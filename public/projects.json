@@ -201,6 +201,16 @@
           "time": "01:47",
           "date": "31/12/2025"
         }
+      },
+      {
+        "id": 19,
+        "name": "Are-We-Living-in-a-Simulation",
+        "path": "data/project19",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "02:27",
+          "date": "02/01/2025"
+        }
       }
     ]
   }
