@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
 import type { ProjectSection } from "@/types/types";
+import ReadingTimeNotification from "@/app/components/ReadingTimeNotification";
+// import * as cheerio from "cheerio";
 
-// Manually clean type definition for props
 type PageProps = {
   params: { slug: string };
 };
@@ -27,7 +28,6 @@ export async function generateStaticParams() {
 }
 
 export default function BlogPage(props: unknown) {
-  // Add a type guard to ensure props structure
   if (
     typeof props === "object" &&
     props !== null &&
@@ -67,10 +67,11 @@ export default function BlogPage(props: unknown) {
 
     return (
       <div className="html-content">
+        <ReadingTimeNotification htmlContent={htmlContent} />
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </div>
     );
   }
 
-  notFound(); // Fallback if type guard fails
+  notFound();
 }
