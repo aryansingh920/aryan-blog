@@ -24,7 +24,7 @@ export default function DynamicLayout({
     // Starfield Animation Logic
     const starfield = document.getElementById("starfield");
     if (starfield) {
-      const numberOfStars = 500;
+      const numberOfStars = 2000;
 
       for (let i = 0; i < numberOfStars; i++) {
         const star = document.createElement("div");
