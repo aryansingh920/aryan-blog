@@ -314,6 +314,63 @@
         These results confirm that the model is well-suited for deployment in autonomous vehicle systems, with robust performance in both controlled and real-world settings.
     </p>
 </section>
+    <section>
+    <h2>Depth Detection</h2>
+    <p>
+        Depth detection is a critical component in understanding the spatial structure of an environment, which is essential for autonomous vehicles. By estimating the distance of objects from the vehicle, this functionality enhances decision-making and obstacle avoidance capabilities.
+    </p>
+
+    <h3>1. Overview</h3>
+    <p>
+        Depth detection in this project leverages the MiDaS (Monocular Depth Sensing) model, a state-of-the-art solution for estimating depth from single images. This approach provides accurate depth maps, even in challenging scenarios like varying lighting conditions and occlusions.
+    </p>
+    <ul>
+        <li><strong>Model:</strong> MiDaS, optimized for monocular depth estimation.</li>
+        <li><strong>Integration:</strong> Combined with YOLOv8 for simultaneous object detection and depth mapping.</li>
+        <li><strong>Output:</strong> Normalized depth maps overlaid on input images for visualization.</li>
+    </ul>
+
+    <h3>2. Workflow</h3>
+    <p>
+        The depth detection process integrates seamlessly with the object detection pipeline. Key steps include:
+    </p>
+    <ul>
+        <li>Loading and preprocessing input images, ensuring compatibility with MiDaS.</li>
+        <li>Estimating depth values and generating normalized depth maps.</li>
+        <li>Overlaying depth maps on original images for enhanced context.</li>
+    </ul>
+
+    <h3>3. Real-Time Visualization</h3>
+    <p>
+        During real-time inference, the system displays the following:
+    </p>
+    <ul>
+        <li>Original frame with detected objects and bounding boxes.</li>
+        <li>Depth map visualization using color gradients for better interpretation.</li>
+    </ul>
+    <img src="https://res.cloudinary.com/ddodpfjxe/image/upload/v1736332645/16/fvild7see7vygz7hwy0q.png" alt="Depth Detection Example" />
+
+    <h3>4. Applications</h3>
+    <p>
+        Depth detection enhances the functionality of autonomous driving systems in several ways:
+    </p>
+    <ul>
+        <li><strong>Collision Avoidance:</strong> By identifying the proximity of objects, the system can preemptively take action to avoid collisions.</li>
+        <li><strong>Path Planning:</strong> Depth data helps in determining the optimal route by understanding the 3D layout of the environment.</li>
+        <li><strong>Improved Object Detection:</strong> By combining depth and 2D data, the system can better differentiate between objects at varying distances.</li>
+    </ul>
+
+    <h3>5. Challenges and Future Directions</h3>
+    <p>
+        Depth detection introduces unique challenges, such as computational complexity and handling dynamic environments. Future work aims to:
+    </p>
+    <ul>
+        <li>Improve the efficiency of depth estimation models for real-time applications.</li>
+        <li>Incorporate stereo camera setups for enhanced depth accuracy.</li>
+        <li>Expand datasets to include diverse scenarios for better generalization.</li>
+    </ul>
+</section>
+
 
 
 
