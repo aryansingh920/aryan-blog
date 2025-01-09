@@ -2,6 +2,7 @@ import React from "react";
 import { Project } from "@/types/types";
 import Link from "next/link";
 import { Card, CardHeader, CardFooter, Image, Button } from "@nextui-org/react";
+import "animate.css";
 
 type ProjectsProps = {
   project: Project;
@@ -25,10 +26,15 @@ const CustomCard: React.FC<ProjectsProps> = ({ project }: ProjectsProps) => {
                 ?.toLowerCase()
                 .replace(/ /g, "-")}`}
             >
-              <u>{project.heading?.replace(/-/g, " ")}</u>
+              <u className="animate__animated animate__rubberBand">
+                {project.heading?.replace(/-/g, " ")}
+              </u>
             </Link>
           </p>
-          <Link href={`/blog/${project.name}`}>
+          <Link
+            className="animate__animated animate__jello"
+            href={`/blog/${project.name}`}
+          >
             <h4 className="text-white font-medium text-xl">
               {project.name.replace(/-/g, " ")}
             </h4>
@@ -46,16 +52,18 @@ const CustomCard: React.FC<ProjectsProps> = ({ project }: ProjectsProps) => {
 
         <Link href={`/blog/${project.name}`}>
           <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-gray-200 flex flex-col items-start">
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-300 text-sm animate__animated animate__jackInTheBox">
               Added On: {project.addedOn.date} at {project.addedOn.time}
             </p>
-            <p className="text-gray-300 text-sm">Author: {project.author}</p>
+            <p className="text-gray-300 text-sm animate__animated animate__fadeInUp">
+              Author: {project.author}
+            </p>
             {/* <Link href={`/blog/${project.name}`}> */}
             <Button
               style={{
                 color: "white",
               }}
-              className="mt-2"
+              className="animate__animated animate__bounceInDown mt-2"
               color="primary"
               radius="full"
               size="sm"

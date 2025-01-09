@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
-
-
+import "animate.css";
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -66,7 +65,7 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <div className="flex items-center justify-between p-4">
         <span className={`text-lg font-bold ${isCollapsed && "hidden"}`}>
-          <Link href="/">
+          <Link className="animate__animated animate__rubberBand" href="/">
             🏠 <u>Home</u>
           </Link>
         </span>
@@ -101,7 +100,7 @@ export default function Sidebar() {
                   href={`/section/${section.heading
                     .toLowerCase()
                     .replace(/ /g, "-")}`}
-                  className="block px-4 py-2 rounded hover:bg-gray-700"
+                  className="block px-4 py-2 rounded hover:bg-gray-700 animate__animated animate__flipInX"
                 >
                   {section.heading.replace("-", " ")}
                 </Link>
@@ -111,7 +110,9 @@ export default function Sidebar() {
                   <li key={project.id}>
                     <Link
                       href={`/blog/${project.name}`}
-                      className="block px-4 py-2 rounded hover:bg-gray-700"
+                      className={`block px-4 py-2 rounded hover:bg-gray-700 animate__animated animate__lightSpeedIn${
+                        Math.random() > 0.5 ? "Right" : "Left"
+                      }`}
                     >
                       {project.name.replace(/-/g, " ")}
                     </Link>
