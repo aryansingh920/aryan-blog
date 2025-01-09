@@ -20,12 +20,12 @@ export default function DynamicLayout({
     return () => window.removeEventListener("resize", checkViewport);
   }, []);
 
-  useEffect(() => {
-    // Starfield Animation Logic
+useEffect(() => {
+  if (typeof window !== "undefined") {
     const starfield = document.getElementById("starfield");
     if (starfield) {
       const numberOfStars = 2000;
-
+      console.log("Starfield found, adding stars...");
       for (let i = 0; i < numberOfStars; i++) {
         const star = document.createElement("div");
         star.className = "star";
@@ -38,33 +38,36 @@ export default function DynamicLayout({
 
         starfield.appendChild(star);
       }
+    } else {
+      console.error("Starfield element not found.");
     }
-  }, []);
+  }
+}, []);
 
-  useEffect(() => {
-    if (window.location.search.includes("noSidebar")) {
-      setNoSidebar(true);
-    }
-  }, []);
+useEffect(() => {
+  if (window.location.search.includes("noSidebar")) {
+    setNoSidebar(true);
+  }
+}, []);
 
-  return (
-    <div className="relative h-screen">
-      {/* Starfield Background */}
-      <div
-        id="starfield"
-        style={{
-          position: "fixed",
-          width: "100%",
-          height: "100%",
-          overflow: "hidden",
-          perspective: "1200px",
-          zIndex: -1,
-        }}
-      ></div>
+return (
+  <div className="relative h-screen">
+    {/* Starfield Background */}
+    <div
+      id="starfield"
+      style={{
+        position: "fixed",
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+        perspective: "1200px",
+        zIndex: 1,
+      }}
+    ></div>
 
-      {/* Styles for Stars */}
-      <style>
-        {`
+    {/* Styles for Stars */}
+    <style>
+      {`
         .star {
           position: absolute;
           width: 2px;
@@ -88,33 +91,33 @@ export default function DynamicLayout({
           }
         }
         `}
-      </style>
+    </style>
 
-      {/* Mobile or Desktop Layout */}
-      <div className="flex h-screen relative">
-        {isMobile ? (
-          <div className="w-full">
-            {!noSidebar && <MobileNavbar />}
-            <div className="flex-1 overflow-y-auto p-0">
-              {children}
-              <Footer />
-            </div>
+    {/* Mobile or Desktop Layout */}
+    <div className="flex h-screen relative z-10">
+      {isMobile ? (
+        <div className="w-full">
+          {!noSidebar && <MobileNavbar />}
+          <div className="flex-1 overflow-y-auto p-0">
+            {children}
+            <Footer />
           </div>
-        ) : (
-          <>
-            {!noSidebar && <Sidebar />}
-            <div
-              className={`flex-1 overflow-y-auto ${
-                !noSidebar && "ml-80"
-              } flex flex-col`}
-            >
-              <div className="flex-1">{children}</div>
+        </div>
+      ) : (
+        <>
+          {!noSidebar && <Sidebar />}
+          <div
+            className={`flex-1 overflow-y-auto ${
+              !noSidebar && "ml-80"
+            } flex flex-col`}
+          >
+            <div className="flex-1">{children}</div>
 
-              {!noSidebar && <Footer />}
-            </div>
-          </>
-        )}
-      </div>
+            {!noSidebar && <Footer />}
+          </div>
+        </>
+      )}
     </div>
-  );
+  </div>
+);
 }

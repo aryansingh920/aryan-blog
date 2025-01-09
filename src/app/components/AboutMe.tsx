@@ -16,7 +16,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }:AboutMeProps) => {
         style={{ ...styles.row, flexDirection: isMobile ? "column" : "row" }}
       >
         <img
-          src="./profile.jpeg"
+          src="/profile.jpeg"
           alt="Your Profile Picture"
           style={styles.profilePicture}
         />

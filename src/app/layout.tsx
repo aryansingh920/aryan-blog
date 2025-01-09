@@ -19,6 +19,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
+        {/* <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/uikit@3.22.0/dist/css/uikit.min.css"
+        /> */}
       </head>
       <body
         style={{
@@ -34,6 +38,8 @@ export default function RootLayout({
         >
           <DynamicLayout>{children}</DynamicLayout>
         </div>
+        {/* <script src="https://cdn.jsdelivr.net/npm/uikit@3.22.0/dist/js/uikit.min.js"></script> */}
+        {/* <script src="https://cdn.jsdelivr.net/npm/uikit@3.22.0/dist/js/uikit-icons.min.js"></script> */}
       </body>
     </html>
   );

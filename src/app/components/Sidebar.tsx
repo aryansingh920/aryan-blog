@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
 
+
+
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [projects, setProjects] = useState<ProjectSection[]>([]);
@@ -95,7 +97,14 @@ export default function Sidebar() {
           {filteredProjects.map((section: ProjectSection) => (
             <div key={section.heading}>
               <h2 className="text-sm font-semibold uppercase text-gray-400 mt-4">
-                {section.heading.replace("-", " ")}
+                <Link
+                  href={`/section/${section.heading
+                    .toLowerCase()
+                    .replace(/ /g, "-")}`}
+                  className="block px-4 py-2 rounded hover:bg-gray-700"
+                >
+                  {section.heading.replace("-", " ")}
+                </Link>
               </h2>
               <ul className="space-y-1 mt-2">
                 {section.projects.map((project: Project) => (
