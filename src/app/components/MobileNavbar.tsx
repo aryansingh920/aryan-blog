@@ -99,9 +99,14 @@ export default function MobileNavbar() {
           {filteredProjects.map((section: ProjectSection) => (
             <div key={section.heading} className="mb-4">
               {/* Heading */}
-              <h2 className="text-sm font-semibold uppercase text-gray-400 mb-2">
-                {section.heading.replace("-", " ")}
-              </h2>
+              <Link
+                onClick={() => setIsOpen(false)}
+                href={`/section/${section.heading.toLowerCase()}`}
+              >
+                <h2 className="text-sm font-semibold uppercase text-gray-400 mb-2 hover:bg-gray-700">
+                  {section.heading.replace("-", " ")}
+                </h2>
+              </Link>
 
               {/* Projects */}
               <ul className="space-y-1">
