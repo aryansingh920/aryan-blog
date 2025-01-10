@@ -3,7 +3,8 @@ import "@/styles/globals.css";
 // import { background } from "../../public/background.gif";
 export const metadata = {
   title: "Aryan's Blog",
-  description: "Aryan's blog page",
+  description:
+    "Explore Aryan's insights on technology, science, and personal growth. Delve into topics like data science, quantum computing, machine learning, and philosophical musings.",
 };
 
 export default function RootLayout({
