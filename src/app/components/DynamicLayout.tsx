@@ -100,7 +100,7 @@ return (
           {!noSidebar && <MobileNavbar />}
           <div className="flex-1 overflow-y-auto p-0">
             {children}
-            <Footer />
+            <Footer isMobile={isMobile} />
           </div>
         </div>
       ) : (
@@ -113,7 +113,7 @@ return (
           >
             <div className="flex-1">{children}</div>
 
-            {!noSidebar && <Footer />}
+            {!noSidebar && <Footer isMobile={isMobile} />}
           </div>
         </>
       )}

@@ -41,7 +41,7 @@ const ReadingTimeNotification: React.FC<ReadingTimeNotificationProps> = ({
     <div
       style={{
         position: "fixed",
-        bottom: "20px",
+        bottom: "40px",
         right: "20px",
         background: "#333",
         color: "#fff",

@@ -65,7 +65,7 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <div className="flex items-center justify-between p-4">
         <span className={`text-lg font-bold ${isCollapsed && "hidden"}`}>
-          <Link className="animate__animated animate__rubberBand" href="/">
+          <Link className="" href="/">
             🏠 <u>Home</u>
           </Link>
         </span>
@@ -100,7 +100,7 @@ export default function Sidebar() {
                   href={`/section/${section.heading
                     .toLowerCase()
                     .replace(/ /g, "-")}`}
-                  className="block px-4 py-2 rounded hover:bg-gray-700 animate__animated animate__flipInX"
+                  className="block px-4 py-2 rounded hover:bg-gray-700 "
                 >
                   {section.heading.replace("-", " ")}
                 </Link>
@@ -110,9 +110,7 @@ export default function Sidebar() {
                   <li key={project.id}>
                     <Link
                       href={`/blog/${project.name}`}
-                      className={`block px-4 py-2 rounded hover:bg-gray-700 animate__animated animate__lightSpeedIn${
-                        Math.random() > 0.5 ? "Right" : "Left"
-                      }`}
+                      className={`block px-4 py-2 rounded hover:bg-gray-700 `}
                     >
                       {project.name.replace(/-/g, " ")}
                     </Link>

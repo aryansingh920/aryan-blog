@@ -2,9 +2,14 @@
 
 import React from "react";
 
-export default function Footer() {
+export default function Footer({ isMobile }: { isMobile: boolean }) {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-1">
+    <footer
+      style={{
+        marginBottom: isMobile ? "20px" : "0",
+      }}
+      className="bg-gray-900 text-gray-300 py-1"
+    >
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
         {/* Left Section: Name and Portfolio */}
         <div className="mb-4 md:mb-0 text-center md:text-left">

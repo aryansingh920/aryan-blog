@@ -66,13 +66,12 @@ export default function BlogPage(props: unknown) {
     }
 
     return (
-      <div
-        className={`html-content animate__animated animate__slideIn${
-          Math.random() > 0.5 ? "Left" : "Right"
-        }`}
-      >
+      <div>
         <ReadingTimeNotification htmlContent={htmlContent} />
-        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        <div
+          className={`html-content `}
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
+        />
       </div>
     );
   }
