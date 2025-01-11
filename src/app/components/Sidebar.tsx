@@ -69,6 +69,7 @@ export default function Sidebar() {
             🏠 <u>Home</u>
           </Link>
         </span>
+        {/* <hr /> */}
         {/* <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="text-gray-400 hover:text-white focus:outline-none"
@@ -95,16 +96,18 @@ export default function Sidebar() {
           {/* Render filtered sections and projects */}
           {filteredProjects.map((section: ProjectSection) => (
             <div key={section.heading}>
-              <h2 className="text-sm font-semibold uppercase text-gray-400 mt-4">
+              <hr />
+              <h2 className="text-sm font-semibold uppercase text-gray-400 mt">
                 <Link
                   href={`/section/${section.heading
                     .toLowerCase()
                     .replace(/ /g, "-")}`}
                   className="block px-4 py-2 rounded hover:bg-gray-700 "
                 >
-                  {section.heading.replace("-", " ")}
+                  ▹&nbsp; {section.heading.replace("-", " ")}
                 </Link>
               </h2>
+              <hr />
               <ul className="space-y-1 mt-2">
                 {section.projects.map((project: Project) => (
                   <li key={project.id}>
@@ -112,7 +115,7 @@ export default function Sidebar() {
                       href={`/blog/${project.name}`}
                       className={`block px-4 py-2 rounded hover:bg-gray-700 `}
                     >
-                      {project.name.replace(/-/g, " ")}
+                      ⚬ &nbsp; {project.name.replace(/-/g, " ")}
                     </Link>
                   </li>
                 ))}

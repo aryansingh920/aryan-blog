@@ -99,14 +99,16 @@ export default function MobileNavbar() {
           {filteredProjects.map((section: ProjectSection) => (
             <div key={section.heading} className="mb-4">
               {/* Heading */}
+              <hr />
               <Link
                 onClick={() => setIsOpen(false)}
                 href={`/section/${section.heading.toLowerCase()}`}
               >
-                <h2 className="text-sm font-semibold uppercase text-gray-400 mb-2 hover:bg-gray-700">
-                  {section.heading.replace("-", " ")}
+                <h2 className="text-sm font-semibold uppercase text-gray-400 mt-1 mb-1 hover:bg-gray-700">
+                  ▹&nbsp;{section.heading.replace("-", " ")}
                 </h2>
               </Link>
+              <hr />
 
               {/* Projects */}
               <ul className="space-y-1">
@@ -117,7 +119,7 @@ export default function MobileNavbar() {
                       href={`/blog/${project.name}`}
                       className="block px-4 py-2 rounded hover:bg-gray-700"
                     >
-                      {project.name.replace(/-/g, " ")}
+                      ⚬ &nbsp; {project.name.replace(/-/g, " ")}
                     </Link>
                   </li>
                 ))}
