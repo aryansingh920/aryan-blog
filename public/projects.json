@@ -241,6 +241,16 @@
           "time": "03:08",
           "date": "04/01/2025"
         }
+      },
+      {
+        "id": 23,
+        "name": "Exploring-the-World-of-Cryogenics",
+        "path": "data/project23",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "00:10",
+          "date": "11/01/2025"
+        }
       }
     ]
   }
