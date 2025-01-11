@@ -105,3 +105,9 @@ footer {
   color: rgb(255, 255, 255);
   /* text-decoration: underline; */
 }
+
+img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
