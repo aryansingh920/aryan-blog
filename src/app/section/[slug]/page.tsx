@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
@@ -96,9 +97,11 @@ export default function SectionPage(props: unknown) {
             <p className="text-gray-500">No projects found in this section.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => (
-                <Card key={project.name} project={project} />
-              ))}
+              {[...projects]
+                .sort(() => Math.random() - 0.5)
+                .map((project) => (
+                  <Card key={project.name} project={project} />
+                ))}
             </div>
           )}
         </section>
