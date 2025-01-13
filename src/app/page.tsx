@@ -1,16 +1,37 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
 import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
-// import Carousel from "./components/Caraousel";
 import AboutMe from "./components/AboutMe";
 import Card from "./components/Card";
 
+// A simple CSS spinner (spiral-like) - you can customize further via Tailwind or your own CSS
+const Loader = () => {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      {/* Spiral/Spinner container */}
+      <div className="loader w-16 h-16 border-4 border-gray-300 border-t-4 border-t-blue-500 rounded-full animate-spin"></div>
+
+      {/* If you'd prefer an image or something else, replace the above <div> with:
+        <img src="/spinner.gif" alt="Loading..." />
+      */}
+      <style jsx>{`
+        .loader {
+          border-top-color: #3498db;
+          border-right-color: #3498db;
+          border-radius: 50%;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
-
+  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [shuffledProjects, setShuffledProjects] = useState<Project[]>([]);
 
@@ -28,7 +49,6 @@ export default function Home() {
         today.getFullYear() * 10000 +
         (today.getMonth() + 1) * 100 +
         today.getDate();
-      // const seed = 20241225;
 
       // A simple seeded random number generator function
       const seededRandom = (seed: number) => {
@@ -43,7 +63,7 @@ export default function Home() {
       return randomValueA - randomValueB;
     });
     setShuffledProjects(sP);
-  }, [projects, shuffledProjects]);
+  }, [projects]);
 
   useEffect(() => {
     fetch("/projects.json")
@@ -69,24 +89,32 @@ export default function Home() {
         });
 
         // Get the seed based on the current date (YYYY-MM-DD)
-        const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
-        // const today = "2024-12-29";
-        // console.log("today", today);
+        const today = new Date().toISOString().split("T")[0];
+        // const today = "2024-12-29"; // For testing
         const rng = seedrandom(today);
 
         // Fisher-Yates shuffle with a seeded random number generator
         for (let i = sortedProjects.length - 1; i > 0; i--) {
-          const j = Math.floor(rng() * (i + 1)); // Generate a random index
+          const j = Math.floor(rng() * (i + 1));
           [sortedProjects[i], sortedProjects[j]] = [
             sortedProjects[j],
             sortedProjects[i],
-          ]; // Swap
+          ];
         }
 
         setProjects(sortedProjects);
+        setLoading(false); // Data loaded, hide the loader
       })
-      .catch((error) => console.error("Error fetching projects:", error));
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
+        setLoading(false); // Even if there's an error, hide loader
+      });
   }, []);
+
+  // If still loading, show the Loader
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main
@@ -97,16 +125,13 @@ export default function Home() {
       }
     >
       <section>
-        <div className="max-w rounded-lg ">
+        <div className="max-w rounded-lg">
           <div className="relative">
             <img
               src="https://media.licdn.com/dms/image/v2/D5616AQF12usVORj44g/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1735963984496?e=1741824000&v=beta&t=0fflCZctRzBVR-E4KWnrM4_yPRVgOW3kZx1MVfgk8B4"
               alt="Banner"
-              className="w-full  object-cover rounded-t-lg"
+              className="w-full object-cover rounded-t-lg"
             />
-            {/* <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 text-white font-bold">
-              <span className="text-sm">With banner image preview</span>
-            </div> */}
           </div>
 
           <div className="relative flex justify-center">
@@ -120,29 +145,14 @@ export default function Home() {
           </div>
 
           <div className="mt-10 text-center">
-            <h1 className="text-3xl  font-semibold">{"All my work's"}</h1>
-            {/* <div className="flex justify-center mt-4 space-x-2">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                Message
-              </button>
-              <button className="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">
-                Call
-              </button>
-            </div> */}
+            <h1 className="text-3xl font-semibold">{"All my work's"}</h1>
           </div>
         </div>
-        {/* </section>
-
-      <section> */}
-        {/* <h1 className="text-3xl font-bold mb-1 mt-1">{"All Blog's"}</h1> */}
 
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {shuffledProjects
-            .reverse()
-            // .sort(() => Math.random() - 0.5)
-            .map((project) => (
-              <Card key={project.name} project={project} />
-            ))}
+          {shuffledProjects.reverse().map((project) => (
+            <Card key={project.name} project={project} />
+          ))}
         </div>
       </section>
 
@@ -150,7 +160,6 @@ export default function Home() {
         <Link href="#about">
           <AboutMe isMobile={isMobile} />
         </Link>
-        {/* <h1 className="text-3xl font-bold mb-1 mt-1">About Me</h1> */}
       </section>
     </main>
   );

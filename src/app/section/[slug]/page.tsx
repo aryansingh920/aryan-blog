@@ -1,113 +1,140 @@
 /* eslint-disable @next/next/no-img-element */
-import fs from "fs";
-import path from "path";
-import { notFound } from "next/navigation";
-import type { ProjectSection } from "@/types/types";
-import Card from "@/app/components/Card";
+"use client";
 
-type PageProps = {
-  params: { slug: string };
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { ProjectSection } from "@/types/types";
+import Card from "@/app/components/Card";
+import seedrandom from "seedrandom";
+
+// The same loader you used in Home.tsx
+const Loader = () => {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      {/* Spiral/Spinner container */}
+      <div className="loader w-16 h-16 border-4 border-gray-300 border-t-4 border-t-blue-500 rounded-full animate-spin"></div>
+      <style jsx>{`
+        .loader {
+          border-top-color: #3498db;
+          border-right-color: #3498db;
+          border-radius: 50%;
+        }
+      `}</style>
+    </div>
+  );
 };
 
-export async function generateStaticParams() {
-  const jsonPath = path.join(process.cwd(), "public", "projects.json");
-  let data: ProjectSection[] = [];
+export default function SectionPage() {
+  // Next.js route parameters in App Router:
+  // If you're using the new `useParams` hook:
+  const params = useParams();
+  const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
+  // If you’re on older Next 13.x can also do `const { slug } = useRouter().query;`
 
-  try {
-    const rawData = fs.readFileSync(jsonPath, "utf-8");
-    data = JSON.parse(rawData);
-  } catch (error) {
-    console.error("Error reading JSON file:", error);
+  const [loading, setLoading] = useState(true);
+  const [sectionName, setSectionName] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [projects, setProjects] = useState<any[]>([]); // or a proper Project type
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!slug) return;
+
+    // Fetch projects.json on the client
+    fetch("/projects.json")
+      .then((res) => res.json())
+      .then((data: ProjectSection[]) => {
+        // 1. Find the matching section
+        const foundSection = data.find(
+          (section) =>
+            section.heading.replace(/ /g, "-").toLowerCase() ===
+            slug.toLowerCase()
+        );
+
+        if (!foundSection) {
+          // no matching section => show 404 or handle gracefully
+          setError(true);
+          setLoading(false);
+          return;
+        }
+
+        // 2. Set the section name
+        setSectionName(foundSection.heading);
+
+        // 3. “Shuffle” the projects the way you want, or just do random
+        // If you want the same seeded logic:
+        const today = new Date().toISOString().split("T")[0];
+        const rng = seedrandom(today);
+        const sortedProjects = [...foundSection.projects];
+
+        // Fisher-Yates or simple random shuffle
+        for (let i = sortedProjects.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [sortedProjects[i], sortedProjects[j]] = [
+            sortedProjects[j],
+            sortedProjects[i],
+          ];
+        }
+
+        setProjects(sortedProjects);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading projects.json:", err);
+        setError(true);
+        setLoading(false);
+      });
+  }, [slug]);
+
+  if (error) {
+    // Instead of a standard “notFound()”, you can show a custom message or
+    // rely on Next’s default 404. For a manual 404:
+    return <p className="m-4 text-red-600">Section not found</p>;
   }
 
-  return data.map((section) => ({
-    slug: section.heading.replace(/ /g, "-").toLowerCase(),
-  }));
-}
+  // Show our spiral loader while data is being fetched
+  if (loading) {
+    return <Loader />;
+  }
 
-export default function SectionPage(props: unknown) {
-  if (
-    typeof props === "object" &&
-    props !== null &&
-    "params" in props &&
-    typeof (props as PageProps).params?.slug === "string"
-  ) {
-    const { slug } = (props as PageProps).params;
+  // If we have data:
+  return (
+    <main className="min-h-screen mainPage">
+      <section>
+        <div className="max-w rounded-lg">
+          <div className="relative">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D5616AQF12usVORj44g/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1735963984496?e=1741824000&v=beta&t=0fflCZctRzBVR-E4KWnrM4_yPRVgOW3kZx1MVfgk8B4"
+              alt="Banner"
+              className="w-full object-cover rounded-t-lg"
+            />
+          </div>
 
-    const jsonPath = path.join(process.cwd(), "public", "projects.json");
-    let data: ProjectSection[] = [];
-
-    try {
-      const rawData = fs.readFileSync(jsonPath, "utf-8");
-      data = JSON.parse(rawData);
-    } catch (error) {
-      console.error("Error reading JSON file:", error);
-      notFound();
-    }
-
-    const section = data.find(
-      (section) => section.heading.replace(/ /g, "-").toLowerCase() === slug
-    );
-
-    if (!section) {
-      notFound();
-    }
-
-    const { projects } = section;
-
-    return (
-      <main className=" min-h-screen mainPage">
-        <section>
-          <div className="max-w rounded-lg ">
-            <div className="relative">
+          <div className="relative flex justify-center">
+            <div className="absolute -top-10">
               <img
-                src="https://media.licdn.com/dms/image/v2/D5616AQF12usVORj44g/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1735963984496?e=1741824000&v=beta&t=0fflCZctRzBVR-E4KWnrM4_yPRVgOW3kZx1MVfgk8B4"
-                alt="Banner"
-                className="w-full  object-cover rounded-t-lg"
+                src="/profile.jpeg"
+                alt="Profile"
+                className="w-20 h-20 rounded-full border-4 border-white"
               />
-              {/* <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 text-white font-bold">
-              <span className="text-sm">With banner image preview</span>
-            </div> */}
-            </div>
-
-            <div className="relative flex justify-center">
-              <div className="absolute -top-10">
-                <img
-                  src="/profile.jpeg"
-                  alt="Profile"
-                  className="w-20 h-20 rounded-full border-4 border-white"
-                />
-              </div>
-            </div>
-
-            <div className="mt-10 text-center">
-              <h1 className="text-3xl font-semibold mb-2">{section.heading}</h1>
-              {/* <div className="flex justify-center mt-4 space-x-2">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                Message
-              </button>
-              <button className="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">
-                Call
-              </button>
-            </div> */}
             </div>
           </div>
 
-          {projects.length === 0 ? (
-            <p className="text-gray-500">No projects found in this section.</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...projects]
-                .sort(() => Math.random() - 0.5)
-                .map((project) => (
-                  <Card key={project.name} project={project} />
-                ))}
-            </div>
-          )}
-        </section>
-      </main>
-    );
-  }
+          <div className="mt-10 text-center">
+            <h1 className="text-3xl font-semibold mb-2">{sectionName}</h1>
+          </div>
+        </div>
 
-  notFound();
+        {projects.length === 0 ? (
+          <p className="text-gray-500">No projects found in this section.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <Card key={project.name} project={project} />
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
+  );
 }
