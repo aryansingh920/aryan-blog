@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import seedrandom from "seedrandom";
 import Link from "next/link";
+import { Pagination } from "@nextui-org/react"; // Import Pagination
 
 import { Project, ProjectSection } from "@/types/types";
 import AboutMe from "./components/AboutMe";
@@ -34,6 +35,10 @@ export default function Home() {
   const [loadingState, setLoadingState] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [shuffledProjects, setShuffledProjects] = useState<Project[]>([]);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9; // Adjust this number as needed
 
   const dispatch = useDispatch<AppDispatch>();
   const {
@@ -105,7 +110,7 @@ export default function Home() {
 
   useEffect(() => {
     if (projects.length > 0) {
-      const sP = projects.sort(() => {
+      const sP = [...projects].sort(() => {
         const today = new Date();
         const seed =
           today.getFullYear() * 10000 +
@@ -130,11 +135,19 @@ export default function Home() {
     return <Loader />;
   }
 
+  // Pagination logic: determine the projects to show on the current page.
+  const totalPages = Math.ceil(shuffledProjects.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedProjects = shuffledProjects
+    .slice()
+    .reverse()
+    .slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <main
       className={
         isMobile
-          ? "m-3  min-h-screen mainPage"
+          ? "m-3 min-h-screen mainPage"
           : "pl-6 pt-6 min-h-screen mainPage"
       }
     >
@@ -146,12 +159,19 @@ export default function Home() {
         />
 
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {shuffledProjects
-            .slice()
-            .reverse()
-            .map((project, index) => (
-              <Card key={index} project={project} />
-            ))}
+          {paginatedProjects.map((project, index) => (
+            <Card key={index} project={project} />
+          ))}
+        </div>
+
+        {/* Render Pagination component below the grid */}
+        <div className="flex justify-center mt-6">
+          <Pagination
+            page={currentPage}
+            total={totalPages}
+            onChange={(page) => setCurrentPage(page)}
+            initialPage={1}
+          />
         </div>
       </section>
 
