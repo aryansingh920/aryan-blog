@@ -1,6 +1,9 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import { Project } from "@/types/types";
+import { Button } from "@nextui-org/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface PageHeaderProps {
@@ -14,6 +17,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   projects,
   isMobile,
 }) => {
+  const router = useRouter();
   return (
     <>
       <div>
@@ -51,32 +55,24 @@ const PageHeader: React.FC<PageHeaderProps> = ({
             {[...new Set(projects?.map((project) => project.heading))].map(
               (uniqueHeading, index) => (
                 <Link
-                  style={{
-                    borderRadius: "10px",
-                    padding: "5px",
-                    margin: "5px",
-                    backgroundColor: "rgba(0,112,255,0.8)",
-                    border: "1px solid rgba(0,0,0,0.1)",
-                    color: "white",
-
-                    //don't change the line
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "rgba(0,112,255,0.5)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "rgba(0,112,255,0.8)";
-                  }}
                   key={index}
                   href={"/section/" + uniqueHeading?.toLowerCase()}
                 >
+                  <Button
+                    onPress={() => {
+                      router.push("/section/" + uniqueHeading?.toLowerCase());
+                    }}
+                    className="m-1"
+                    color="primary"
+                    variant="ghost"
+                  >
+                    <b>{uniqueHeading}</b>
+                  </Button>
                   {/* <p
                     className="m-1"
                   
                   > */}
-                  {uniqueHeading}
+                  {/* {uniqueHeading} */}
                   {/* </p> */}
                 </Link>
               )
