@@ -11,7 +11,7 @@ import Card from "./components/Card";
 // A simple CSS spinner (spiral-like) - you can customize further via Tailwind or your own CSS
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen loaderBg">
       {/* Spiral/Spinner container */}
       <div className="loader w-16 h-16 border-4 border-gray-300 border-t-4 border-t-blue-500 rounded-full animate-spin"></div>
 
