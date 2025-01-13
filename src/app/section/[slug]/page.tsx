@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { ProjectSection } from "@/types/types";
 import Card from "@/app/components/Card";
 import seedrandom from "seedrandom";
+import PageHeader from "@/app/components/PageHeader";
 
 // The same loader you used in Home.tsx
 const Loader = () => {
@@ -45,6 +46,7 @@ export default function SectionPage() {
       .then((res) => res.json())
       .then((data: ProjectSection[]) => {
         // 1. Find the matching section
+        console.log("at slug", projects);
         const foundSection = data.find(
           (section) =>
             section.heading.replace(/ /g, "-").toLowerCase() ===
@@ -101,29 +103,7 @@ export default function SectionPage() {
   return (
     <main className="min-h-screen mainPage">
       <section>
-        <div className="max-w rounded-lg">
-          <div className="relative">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D5616AQF12usVORj44g/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1735963984496?e=1741824000&v=beta&t=0fflCZctRzBVR-E4KWnrM4_yPRVgOW3kZx1MVfgk8B4"
-              alt="Banner"
-              className="w-full object-cover rounded-t-lg"
-            />
-          </div>
-
-          <div className="relative flex justify-center">
-            <div className="absolute -top-10">
-              <img
-                src="/profile.jpeg"
-                alt="Profile"
-                className="w-20 h-20 rounded-full border-4 border-white"
-              />
-            </div>
-          </div>
-
-          <div className="mt-10 text-center">
-            <h1 className="text-3xl font-semibold mb-2">{sectionName}</h1>
-          </div>
-        </div>
+        <PageHeader sectionName={sectionName} />
 
         {projects.length === 0 ? (
           <p className="text-gray-500">No projects found in this section.</p>

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Project, ProjectSection } from "@/types/types";
 import AboutMe from "./components/AboutMe";
 import Card from "./components/Card";
+import PageHeader from "./components/PageHeader";
 
 // A simple CSS spinner (spiral-like) - you can customize further via Tailwind or your own CSS
 const Loader = () => {
@@ -125,33 +126,15 @@ export default function Home() {
       }
     >
       <section>
-        <div className="max-w rounded-lg">
-          <div className="relative">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D5616AQF12usVORj44g/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1735963984496?e=1741824000&v=beta&t=0fflCZctRzBVR-E4KWnrM4_yPRVgOW3kZx1MVfgk8B4"
-              alt="Banner"
-              className="w-full object-cover rounded-t-lg"
-            />
-          </div>
-
-          <div className="relative flex justify-center">
-            <div className="absolute -top-10">
-              <img
-                src="/profile.jpeg"
-                alt="Profile"
-                className="w-20 h-20 rounded-full border-4 border-white"
-              />
-            </div>
-          </div>
-
-          <div className="mt-10 text-center">
-            <h1 className="text-3xl font-semibold">{"All my work's"}</h1>
-          </div>
-        </div>
+        <PageHeader
+          sectionName="All my projects"
+          projects={projects}
+          isMobile={isMobile}
+        />
 
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {shuffledProjects.reverse().map((project) => (
-            <Card key={project.name} project={project} />
+          {shuffledProjects.reverse().map((project, index) => (
+            <Card key={index} project={project} />
           ))}
         </div>
       </section>
