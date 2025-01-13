@@ -1,7 +1,7 @@
 import React from "react";
 import { Project } from "@/types/types";
 import Link from "next/link";
-import { Card, CardHeader, CardFooter, Image, Button } from "@nextui-org/react";
+import { Card, CardHeader, CardFooter, Image } from "@nextui-org/react";
 import "animate.css";
 
 type ProjectsProps = {
@@ -52,17 +52,14 @@ const CustomCard: React.FC<ProjectsProps> = ({ project }: ProjectsProps) => {
             </p>
             <p className="text-gray-300 text-sm ">Author: {project.author}</p>
             {/* <Link href={`/blog/${project.name}`}> */}
-            <Button
+            <p
               style={{
                 color: "white",
               }}
-              className=" mt-2"
-              color="primary"
-              radius="full"
-              size="sm"
+              className=" mt-2 text-sm text-gray-500"
             >
-              Read More
-            </Button>
+              Read More...
+            </p>
             {/* </Link> */}
           </CardFooter>
         </Link>
