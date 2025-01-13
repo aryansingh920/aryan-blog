@@ -15,12 +15,15 @@
     "@nextui-org/react": "^2.6.11",
     "@nextui-org/system": "^2.4.6",
     "@nextui-org/theme": "^2.4.5",
+    "@reduxjs/toolkit": "^2.5.0",
     "animate.css": "^4.1.1",
     "cheerio": "^1.0.0",
     "framer-motion": "^11.14.4",
     "next": "15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "redux-thunk": "^3.1.0",
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-redux": "^7.1.34",
     "@types/seedrandom": "^3.0.8",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",

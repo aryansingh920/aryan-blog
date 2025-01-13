@@ -2,9 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+
+
 import { Project, ProjectSection } from "@/types/types";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProjects } from "@/store/slices/projectsSlice";
+import type { RootState, AppDispatch } from "@/store";
 
 export default function MobileNavbar() {
+  const dispatch = useDispatch<AppDispatch>();
+  const {
+    sections: reduxSections,
+    loading: reduxLoading,
+    error: reduxError,
+  } = useSelector((state: RootState) => state.projects);
+
   const [isOpen, setIsOpen] = useState(false);
   const [projects, setProjects] = useState<ProjectSection[]>([]);
   const [shuffledProjects, setShuffledProjects] = useState<ProjectSection[]>(
@@ -13,30 +25,42 @@ export default function MobileNavbar() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Fetch the projects JSON file
-    fetch("/projects.json")
-      .then((res) => res.json())
-      .then((data) => setProjects(data));
-  }, []);
+    // Dispatch the Redux action to fetch projects on mount
+    dispatch(fetchProjects());
+  }, [dispatch]);
 
   useEffect(() => {
-    const sP = projects.sort(() => {
+    // Update local 'projects' state when Redux data is ready
+    if (!reduxLoading && !reduxError && reduxSections.length > 0) {
+      setProjects(reduxSections);
+    }
+  }, [reduxSections, reduxLoading, reduxError]);
+
+  useEffect(() => {
+    if (projects.length === 0) return;
+
+    // Clone the array to avoid in-place mutation during sort
+    const projectsClone = [...projects];
+
+    const sP = projectsClone.sort(() => {
       const today = new Date();
       const seed =
         today.getFullYear() * 10000 +
         (today.getMonth() + 1) * 100 +
         today.getDate();
-      // const seed = 20241225; // Example of a fixed seed for debugging
 
-      // A simple seeded random number generator function
-      const seededRandom = (seed: number) => {
-        const x = Math.sin(seed) * 10000;
+      const seededRandom = (seedVal: number) => {
+        const x = Math.sin(seedVal) * 10000;
         return x - Math.floor(x);
       };
 
       // Use the seed and index to generate randomness
-      const randomValueA = seededRandom(seed + projects.indexOf(projects[0]));
-      const randomValueB = seededRandom(seed + projects.indexOf(projects[1]));
+      const randomValueA = seededRandom(
+        seed + projectsClone.indexOf(projectsClone[0])
+      );
+      const randomValueB = seededRandom(
+        seed + projectsClone.indexOf(projectsClone[1])
+      );
 
       return randomValueA - randomValueB;
     });
@@ -51,7 +75,6 @@ export default function MobileNavbar() {
       );
       return { ...section, projects: filteredItems };
     })
-    // Filter out sections that have no matching projects
     .filter((section) => section.projects.length > 0);
 
   return (
@@ -98,7 +121,6 @@ export default function MobileNavbar() {
           {/* Render filtered sections and projects */}
           {filteredProjects.map((section: ProjectSection) => (
             <div key={section.heading} className="mb-4">
-              {/* Heading */}
               <hr />
               <Link
                 onClick={() => setIsOpen(false)}

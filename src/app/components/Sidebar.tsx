@@ -1,11 +1,25 @@
 "use client";
-//sidebar for desktop devices
+// sidebar for desktop devices
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+
+
 import { Project, ProjectSection } from "@/types/types";
 import "animate.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProjects } from "@/store/slices/projectsSlice";
+import type { RootState, AppDispatch } from "@/store";
+
 export default function Sidebar() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const {
+    sections: reduxSections,
+    loading: reduxLoading,
+    error: reduxError,
+  } = useSelector((state: RootState) => state.projects);
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [projects, setProjects] = useState<ProjectSection[]>([]);
   const [shuffledProjects, setShuffledProjects] = useState<ProjectSection[]>(
@@ -13,32 +27,44 @@ export default function Sidebar() {
   );
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Dispatch the fetch action on mount
   useEffect(() => {
     setIsCollapsed(false);
-    // Fetch the projects JSON file
-    fetch("/projects.json")
-      .then((res) => res.json())
-      .then((data) => setProjects(data));
-  }, []);
+    dispatch(fetchProjects());
+  }, [dispatch]);
+
+  // Update local 'projects' state when Redux sections change
+  useEffect(() => {
+    if (!reduxLoading && !reduxError && reduxSections.length > 0) {
+      setProjects(reduxSections);
+    }
+  }, [reduxSections, reduxLoading, reduxError]);
 
   useEffect(() => {
-    const sP = projects.sort(() => {
+    if (projects.length === 0) return;
+
+    // Clone the array to avoid in-place mutation
+    const projectsClone = [...projects];
+
+    const sP = projectsClone.sort(() => {
       const today = new Date();
       const seed =
         today.getFullYear() * 10000 +
         (today.getMonth() + 1) * 100 +
         today.getDate();
-      // const seed = 20241225; // Example of a fixed seed for debugging
 
-      // A simple seeded random number generator function
-      const seededRandom = (seed: number) => {
-        const x = Math.sin(seed) * 10000;
+      const seededRandom = (seedVal: number) => {
+        const x = Math.sin(seedVal) * 10000;
         return x - Math.floor(x);
       };
 
-      // Use the seed and index to generate randomness
-      const randomValueA = seededRandom(seed + projects.indexOf(projects[0]));
-      const randomValueB = seededRandom(seed + projects.indexOf(projects[1]));
+      // For simplicity, use indices of the first two elements
+      const randomValueA = seededRandom(
+        seed + projectsClone.indexOf(projectsClone[0])
+      );
+      const randomValueB = seededRandom(
+        seed + projectsClone.indexOf(projectsClone[1])
+      );
 
       return randomValueA - randomValueB;
     });
@@ -53,7 +79,6 @@ export default function Sidebar() {
       );
       return { ...section, projects: filteredItems };
     })
-    // Filter out entire sections that have no matching projects
     .filter((section) => section.projects.length > 0);
 
   return (
@@ -65,17 +90,11 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <div className="flex items-center justify-between p-4">
         <span className={`text-lg font-bold ${isCollapsed && "hidden"}`}>
-          <Link className="" href="/">
+          <Link href="/">
             🏠 <u>Home</u>
           </Link>
         </span>
-        {/* <hr /> */}
-        {/* <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="text-gray-400 hover:text-white focus:outline-none"
-        >
-          {isCollapsed ? "→" : "←"}
-        </button> */}
+        {/* Toggle button removed for brevity */}
       </div>
 
       {/* If sidebar is not collapsed, display search bar and filtered results */}
@@ -102,7 +121,7 @@ export default function Sidebar() {
                   href={`/section/${section.heading
                     .toLowerCase()
                     .replace(/ /g, "-")}`}
-                  className="block px-4 py-2 rounded hover:bg-gray-700 "
+                  className="block px-4 py-2 rounded hover:bg-gray-700"
                 >
                   ▹&nbsp; {section.heading.replace("-", " ")}
                 </Link>
@@ -113,7 +132,7 @@ export default function Sidebar() {
                   <li key={project.id}>
                     <Link
                       href={`/blog/${project.name}`}
-                      className={`block px-4 py-2 rounded hover:bg-gray-700 `}
+                      className="block px-4 py-2 rounded hover:bg-gray-700"
                     >
                       ⚬ &nbsp; {project.name.replace(/-/g, " ")}
                     </Link>

@@ -1,26 +1,18 @@
-import fs from "fs";
 import path from "path";
+import fs from "fs";
 import { notFound } from "next/navigation";
 import type { ProjectSection } from "@/types/types";
 import ReadingTimeNotification from "@/app/components/ReadingTimeNotification";
-// import * as cheerio from "cheerio";
+import { readProjectsData } from "@/lib/projectsData";
 
 type PageProps = {
   params: { slug: string };
 };
 
 export async function generateStaticParams() {
-  const jsonPath = path.join(process.cwd(), "public", "projects.json");
-  let data: ProjectSection[] = [];
+  const data = readProjectsData();
 
-  try {
-    const rawData = fs.readFileSync(jsonPath, "utf-8");
-    data = JSON.parse(rawData);
-  } catch (error) {
-    console.error("Error reading JSON file:", error);
-  }
-
-  return data.flatMap((section) =>
+  return data.flatMap((section: ProjectSection) =>
     section.projects.map((project) => ({
       slug: project.name,
     }))
@@ -35,17 +27,7 @@ export default function BlogPage(props: unknown) {
     typeof (props as PageProps).params?.slug === "string"
   ) {
     const { slug } = (props as PageProps).params;
-
-    const jsonPath = path.join(process.cwd(), "public", "projects.json");
-    let data: ProjectSection[] = [];
-
-    try {
-      const rawData = fs.readFileSync(jsonPath, "utf-8");
-      data = JSON.parse(rawData);
-    } catch (error) {
-      console.error("Error reading JSON file:", error);
-      notFound();
-    }
+    const data = readProjectsData();
 
     const project = data
       .flatMap((section) => section.projects)
@@ -69,7 +51,7 @@ export default function BlogPage(props: unknown) {
       <div>
         <ReadingTimeNotification htmlContent={htmlContent} />
         <div
-          className={`html-content `}
+          className={`html-content`}
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       </div>

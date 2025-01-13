@@ -2,16 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { ProjectSection } from "@/types/types";
-import Card from "@/app/components/Card";
+import { useSelector, useDispatch } from "react-redux";
 import seedrandom from "seedrandom";
-import PageHeader from "@/app/components/PageHeader";
 
-// The same loader you used in Home.tsx
+import { Project, ProjectSection } from "@/types/types";
+import Card from "@/app/components/Card";
+import PageHeader from "@/app/components/PageHeader";
+import { fetchProjects } from "@/store/slices/projectsSlice";
+
+// Import Redux store types
+import type { RootState, AppDispatch } from "@/store";
+
 const Loader = () => {
   return (
     <div className="flex items-center justify-center h-screen loaderBg">
-      {/* Spiral/Spinner container */}
       <div className="loader w-16 h-16 border-4 border-gray-300 border-t-4 border-t-blue-500 rounded-full animate-spin"></div>
       <style jsx>{`
         .loader {
@@ -25,80 +29,81 @@ const Loader = () => {
 };
 
 export default function SectionPage() {
-  // Next.js route parameters in App Router:
-  // If you're using the new `useParams` hook:
   const params = useParams();
   const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
-  // If you’re on older Next 13.x can also do `const { slug } = useRouter().query;`
 
-  const [loading, setLoading] = useState(true);
+  // Use typed dispatch and selector
+  const dispatch = useDispatch<AppDispatch>();
+  const { sections, loading, error } = useSelector(
+    (state: RootState) => state.projects
+  );
+
   const [sectionName, setSectionName] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [projects, setProjects] = useState<any[]>([]); // or a proper Project type
-  const [error, setError] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [localLoading, setLocalLoading] = useState(true);
+  const [localError, setLocalError] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchProjects());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!slug) return;
 
-    // Fetch projects.json on the client
-    fetch("/projects.json")
-      .then((res) => res.json())
-      .then((data: ProjectSection[]) => {
-        // 1. Find the matching section
-        // console.log("at slug", projects);
-        const foundSection = data.find(
-          (section) =>
-            section.heading.replace(/ /g, "-").toLowerCase() ===
-            slug.toLowerCase()
-        );
+    if (loading) {
+      setLocalLoading(true);
+      return;
+    }
 
-        if (!foundSection) {
-          // no matching section => show 404 or handle gracefully
-          setError(true);
-          setLoading(false);
-          return;
-        }
+    if (error) {
+      setLocalError(true);
+      setLocalLoading(false);
+      return;
+    }
 
-        // 2. Set the section name
-        setSectionName(foundSection.heading);
+    if (sections.length > 0) {
+      const foundSection = sections.find(
+        (section: ProjectSection) =>
+          section.heading.replace(/ /g, "-").toLowerCase() ===
+          slug?.toLowerCase()
+      );
 
-        // 3. “Shuffle” the projects the way you want, or just do random
-        // If you want the same seeded logic:
-        const today = new Date().toISOString().split("T")[0];
-        const rng = seedrandom(today);
-        const sortedProjects = [...foundSection.projects];
+      if (!foundSection) {
+        setLocalError(true);
+        setLocalLoading(false);
+        return;
+      }
 
-        // Fisher-Yates or simple random shuffle
-        for (let i = sortedProjects.length - 1; i > 0; i--) {
-          const j = Math.floor(rng() * (i + 1));
-          [sortedProjects[i], sortedProjects[j]] = [
-            sortedProjects[j],
-            sortedProjects[i],
-          ];
-        }
+      setSectionName(foundSection.heading);
 
-        setProjects(sortedProjects);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error loading projects.json:", err);
-        setError(true);
-        setLoading(false);
-      });
-  }, [slug]);
+      const today = new Date().toISOString().split("T")[0];
+      const rng = seedrandom(today);
+      const sortedProjects = [...foundSection.projects];
 
-  if (error) {
-    // Instead of a standard “notFound()”, you can show a custom message or
-    // rely on Next’s default 404. For a manual 404:
+      for (let i = sortedProjects.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [sortedProjects[i], sortedProjects[j]] = [
+          sortedProjects[j],
+          sortedProjects[i],
+        ];
+      }
+
+      setProjects(sortedProjects);
+      setLocalLoading(false);
+    } else {
+      setLocalLoading(false);
+      setProjects([]);
+    }
+  }, [slug, sections, loading, error]);
+
+  if (localError) {
     return <p className="m-4 text-red-600">Section not found</p>;
   }
 
-  // Show our spiral loader while data is being fetched
-  if (loading) {
+  if (localLoading) {
     return <Loader />;
   }
 
-  // If we have data:
   return (
     <main className="min-h-screen mainPage">
       <section>
