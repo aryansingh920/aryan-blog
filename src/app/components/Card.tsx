@@ -9,7 +9,7 @@ type ProjectsProps = {
 };
 
 const CustomCard: React.FC<ProjectsProps> = ({ project }: ProjectsProps) => {
-  const backgroundUrl = `https://image.pollinations.ai/prompt/${project.name}`;
+  // const backgroundUrl = `https://image.pollinations.ai/prompt/${project.name}`;
 
   return (
     // <Link href={`/blog/${project.name}`}>
@@ -40,8 +40,8 @@ const CustomCard: React.FC<ProjectsProps> = ({ project }: ProjectsProps) => {
           <Image
             removeWrapper
             alt={`Background for ${project.name}`}
-            className="z-0 w-full h-full object-cover"
-            src={backgroundUrl}
+            className="z-0 w-full h-full object-cover opacity-100"
+            src={`https://image.pollinations.ai/prompt/${project.name}`}
           />
         </Link>
 

@@ -38,7 +38,7 @@ export default function Home() {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9; // Adjust this number as needed
+  const itemsPerPage = 7; // Adjust this number as needed
 
   const dispatch = useDispatch<AppDispatch>();
   const {
