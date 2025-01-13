@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -86,7 +85,7 @@ export default function SectionPage() {
         setError(true);
         setLoading(false);
       });
-  }, [slug]);
+  }, [slug, projects]);
 
   if (error) {
     // Instead of a standard “notFound()”, you can show a custom message or
