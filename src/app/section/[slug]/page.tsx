@@ -45,7 +45,7 @@ export default function SectionPage() {
       .then((res) => res.json())
       .then((data: ProjectSection[]) => {
         // 1. Find the matching section
-        console.log("at slug", projects);
+        // console.log("at slug", projects);
         const foundSection = data.find(
           (section) =>
             section.heading.replace(/ /g, "-").toLowerCase() ===
@@ -85,7 +85,7 @@ export default function SectionPage() {
         setError(true);
         setLoading(false);
       });
-  }, [slug, projects]);
+  }, [slug]);
 
   if (error) {
     // Instead of a standard “notFound()”, you can show a custom message or
