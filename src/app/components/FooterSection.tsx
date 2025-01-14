@@ -21,7 +21,7 @@ interface FooterSectionProps {
   isMobile: boolean;
 }
 
-const FooterSection = ({ isMobile }: FooterSectionProps) => {
+const FooterSection = ({}: FooterSectionProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { sections, loading, error } = useSelector(
     (state: RootState) => state.projects
@@ -64,11 +64,7 @@ const FooterSection = ({ isMobile }: FooterSectionProps) => {
   }
 
   return (
-    <div
-      className={`flex space-x-${isMobile ? "10" : "20"} ${
-        !isMobile && "ml-5 mr-5"
-      } mb-5`}
-    >
+    <div className={`flex space-x-10 ml-5 mr-5 mb-5`}>
       <CustomCard project={sortedProjects[randomNumbers[0]]} />
       <CustomCard project={sortedProjects[randomNumbers[1]]} />
     </div>
