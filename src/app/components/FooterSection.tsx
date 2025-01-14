@@ -64,7 +64,11 @@ const FooterSection = ({ isMobile }: FooterSectionProps) => {
   }
 
   return (
-    <div className={`flex space-x-${isMobile ? "10" : "20"} ml-5 mr-5 mb-5`}>
+    <div
+      className={`flex space-x-${isMobile ? "10" : "20"} ${
+        !isMobile && "ml-5 mr-5"
+      } mb-5`}
+    >
       <CustomCard project={sortedProjects[randomNumbers[0]]} />
       <CustomCard project={sortedProjects[randomNumbers[1]]} />
     </div>
