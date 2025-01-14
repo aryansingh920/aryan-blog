@@ -65,7 +65,7 @@ const FooterSection = ({ isMobile }: FooterSectionProps) => {
 
   return (
     <div
-      className={`flex space-x-${isMobile ? "10" : "20"} ${
+      className={`flex space-x-${isMobile ? "15" : "20"} ${
         !isMobile && "ml-5 mr-5"
       } mb-5`}
     >
