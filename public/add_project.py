@@ -146,9 +146,9 @@ def html_template(project_name, project_github="https://github.com/aryansingh920
     </head>
 
     <body>
-        <footer>
+        <section>
             <p>Developed by {project_author}. Explore the full implementation on <a href="{project_github}" target="_blank">GitHub</a>.</p>
-        </footer>
+        </section>
     </body>
     </html>
     '''
