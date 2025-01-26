@@ -160,7 +160,7 @@ export default function Home() {
 
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {paginatedProjects.map((project, index) => (
-            <Card isMobile={isMobile} key={index} project={project} />
+            <Card key={index} project={project} />
           ))}
         </div>
 
