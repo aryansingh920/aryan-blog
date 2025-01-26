@@ -134,6 +134,16 @@
           "time": "12:34",
           "date": "24/12/2024"
         }
+      },
+      {
+        "id": 26,
+        "name": "QUAITOR-The-Future-of-Ultra-Secure-Networking",
+        "path": "data/project26",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "00:34",
+          "date": "26/01/2025"
+        }
       }
     ]
   },
