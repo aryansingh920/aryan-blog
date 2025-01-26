@@ -42,10 +42,17 @@ export default function SectionPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [localLoading, setLocalLoading] = useState(true);
   const [localError, setLocalError] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchProjects());
-  }, [dispatch]);
+    useEffect(() => {
+      dispatch(fetchProjects());
+    }, [dispatch]);
+    useEffect(() => {
+      const checkViewport = () => setIsMobile(window.innerWidth < 768);
+      checkViewport();
+      window.addEventListener("resize", checkViewport);
+      return () => window.removeEventListener("resize", checkViewport);
+    }, []);
 
   useEffect(() => {
     if (!slug) return;
@@ -104,6 +111,7 @@ export default function SectionPage() {
     return <Loader />;
   }
 
+
   return (
     <main className="min-h-screen mainPage">
       <section>
@@ -114,7 +122,7 @@ export default function SectionPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <Card key={project.name} project={project} />
+              <Card isMobile={isMobile} key={project.name} project={project} />
             ))}
           </div>
         )}

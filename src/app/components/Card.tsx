@@ -7,9 +7,10 @@ import { Card, CardHeader, CardFooter, Image } from "@nextui-org/react";
 
 type ProjectsProps = {
   project: Project;
+  isMobile: boolean;
 };
 
-const CustomCard: React.FC<ProjectsProps> = ({ project }) => {
+const CustomCard: React.FC<ProjectsProps> = ({ project, isMobile }) => {
   // If project is undefined, don't render anything
   if (!project) {
     return null;
@@ -46,7 +47,8 @@ const CustomCard: React.FC<ProjectsProps> = ({ project }) => {
             alt={`Background for ${project.name}`}
             className="z-0 w-full h-full object-cover opacity-100"
             src={`https://image.pollinations.ai/prompt/${
-              project.name + " no text in the image"
+              project.name + " no text in the image" + isMobile &&
+              +" and dimensions as 180*300"
             }`}
           />
         </Link>
