@@ -47,7 +47,7 @@ const CustomCard: React.FC<ProjectsProps> = ({ project, isMobile }) => {
             alt={`Background for ${project.name}`}
             className="z-0 w-full h-full object-cover opacity-100"
             src={`https://image.pollinations.ai/prompt/${
-              project.name + " no text in the image" + isMobile &&
+              project.name + " with no text in the image" + isMobile &&
               +" and dimensions as 180*300"
             }`}
           />
