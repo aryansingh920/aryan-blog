@@ -118,6 +118,16 @@
           "time": "21:40",
           "date": "17/12/2024"
         }
+      },
+      {
+        "id": 27,
+        "name": "Understanding-Financial-Models-Options-Trading-Stress-Testing-and-Yield-Curve-Modeling",
+        "path": "data/project27",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "21:32",
+          "date": "26/01/2025"
+        }
       }
     ]
   },
@@ -142,7 +152,7 @@
         "author": "Aryan Singh",
         "addedOn": {
           "time": "00:34",
-          "date": "26/01/2025"
+          "date": "24/01/2025"
         }
       }
     ]
