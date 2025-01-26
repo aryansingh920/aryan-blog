@@ -3,13 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-
 import { Project, ProjectSection } from "@/types/types";
-import "animate.css";
-
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProjects } from "@/store/slices/projectsSlice";
 import type { RootState, AppDispatch } from "@/store";
+
+import BackgroundMusicPlayer from "@/app/components/BackgroundMusicPlayer"; // Import the music player component
 
 export default function Sidebar() {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,6 +25,7 @@ export default function Sidebar() {
     []
   );
   const [searchTerm, setSearchTerm] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false); // State for music play/pause
 
   // Dispatch the fetch action on mount
   useEffect(() => {
@@ -43,9 +43,7 @@ export default function Sidebar() {
   useEffect(() => {
     if (projects.length === 0) return;
 
-    // Clone the array to avoid in-place mutation
     const projectsClone = [...projects];
-
     const sP = projectsClone.sort(() => {
       const today = new Date();
       const seed =
@@ -58,7 +56,6 @@ export default function Sidebar() {
         return x - Math.floor(x);
       };
 
-      // For simplicity, use indices of the first two elements
       const randomValueA = seededRandom(
         seed + projectsClone.indexOf(projectsClone[0])
       );
@@ -81,6 +78,11 @@ export default function Sidebar() {
     })
     .filter((section) => section.projects.length > 0);
 
+  // Play/pause music handler
+  const handleMusicToggle = () => {
+    setIsPlaying((prev) => !prev); // Toggle play state
+  };
+
   return (
     <div
       className={`${
@@ -94,8 +96,17 @@ export default function Sidebar() {
             🏠 <u>Home</u>
           </Link>
         </span>
-        {/* Toggle button removed for brevity */}
+        {/* Music play/pause button */}
+        <button
+          onClick={handleMusicToggle}
+          className="ml-4 px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
+        >
+          {isPlaying ? "⏸ Pause Music" : "▶️ Play Music"}
+        </button>
       </div>
+
+      {/* Include BackgroundMusicPlayer */}
+      <BackgroundMusicPlayer isPlaying={isPlaying} />
 
       {/* If sidebar is not collapsed, display search bar and filtered results */}
       {!isCollapsed ? (

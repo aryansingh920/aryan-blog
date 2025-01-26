@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-
 import { Project, ProjectSection } from "@/types/types";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProjects } from "@/store/slices/projectsSlice";
 import type { RootState, AppDispatch } from "@/store";
+
+import BackgroundMusicPlayer from "@/app/components/BackgroundMusicPlayer"; // Import the BackgroundMusicPlayer component
 
 export default function MobileNavbar() {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +24,7 @@ export default function MobileNavbar() {
     []
   );
   const [searchTerm, setSearchTerm] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false); // State to control music playback
 
   useEffect(() => {
     // Dispatch the Redux action to fetch projects on mount
@@ -77,6 +79,11 @@ export default function MobileNavbar() {
     })
     .filter((section) => section.projects.length > 0);
 
+  // Play/pause music handler
+  const handleMusicToggle = () => {
+    setIsPlaying((prev) => !prev); // Toggle play/pause state
+  };
+
   return (
     <nav
       style={{
@@ -88,18 +95,31 @@ export default function MobileNavbar() {
     >
       {/* Navbar Header */}
       <div className="flex items-center justify-between p-4">
-        <h1 className="text-lg font-bold">
-          <Link href="/">
-            🏠 <u>Home</u>
-          </Link>
-        </h1>
+        <div>
+          <h1 className="text-lg font-bold">
+            <Link href="/">
+              🏠 <u>Home</u>
+            </Link>
+          </h1>
+          {/* Music Play/Pause Button */}
+          <button
+            onClick={handleMusicToggle}
+            className="mt-1 px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
+          >
+            {isPlaying ? "⏸ Pause Music" : "▶️ Play Music"}
+          </button>
+        </div>
+
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-white focus:outline-none"
+          className="text-white focus:outline-none "
         >
           {isOpen ? "✕" : "☰"}
         </button>
       </div>
+
+      {/* Include BackgroundMusicPlayer */}
+      <BackgroundMusicPlayer isPlaying={isPlaying} />
 
       {/* Collapsible Menu */}
       {isOpen && (
