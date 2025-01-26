@@ -35,6 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoShuffleInterval]);
 
   // Trigger re-render after the last slide to reset the carousel
