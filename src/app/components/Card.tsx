@@ -44,7 +44,7 @@ const CustomCard: React.FC<ProjectsProps> = ({ project }) => {
           <Image
             removeWrapper
             alt={`Background for ${project.name}`}
-            className="z-0 w-full h-full object-cover opacity-100"
+            className="z-0 w-full h-full object-cover opacity-90"
             src={`https://image.pollinations.ai/prompt/${
               project.name + " + no text in the image"
             }`}
