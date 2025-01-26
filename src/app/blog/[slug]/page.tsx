@@ -5,6 +5,7 @@ import type { ProjectSection } from "@/types/types";
 import ReadingTimeNotification from "@/app/components/ReadingTimeNotification";
 import { readProjectsData } from "@/lib/projectsData";
 
+import MathJaxWrapper from "@/app/components/MathJaxWrapper";
 type PageProps = {
   params: { slug: string };
 };
@@ -48,13 +49,15 @@ export default function BlogPage(props: unknown) {
     }
 
     return (
-      <div>
-        <ReadingTimeNotification htmlContent={htmlContent} />
-        <div
-          className={`html-content`}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
-        />
-      </div>
+      <MathJaxWrapper>
+        <div>
+          <ReadingTimeNotification htmlContent={htmlContent} />
+          <div
+            className={`html-content`}
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+          />
+        </div>
+      </MathJaxWrapper>
     );
   }
 

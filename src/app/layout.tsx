@@ -1,7 +1,7 @@
-import DynamicLayout from "@/app/components/DynamicLayout";
 import "@/styles/globals.css";
 import { Providers } from "./providers";
-// import { background } from "../../public/background.gif";
+import DynamicLayout from "@/app/components/DynamicLayout";
+
 export const metadata = {
   title: "Aryan's Blog",
   description:
@@ -20,31 +20,21 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
-
-        {/* <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/uikit@3.22.0/dist/css/uikit.min.css"
-        /> */}
+        {/* Removed MathJax scripts from RootLayout */}
       </head>
-      <Providers>
-        <body
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 35%, rgba(189,189,189,1) 100%)",
-          }}
-          className="h-screen"
-        >
-          <div
-            style={{
-              overflowY: "auto",
-            }}
-          >
+      <body
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 35%, rgba(189,189,189,1) 100%)",
+        }}
+        className="h-screen"
+      >
+        <Providers>
+          <div style={{ overflowY: "auto" }}>
             <DynamicLayout>{children}</DynamicLayout>
           </div>
-          {/* <script src="https://cdn.jsdelivr.net/npm/uikit@3.22.0/dist/js/uikit.min.js"></script> */}
-          {/* <script src="https://cdn.jsdelivr.net/npm/uikit@3.22.0/dist/js/uikit-icons.min.js"></script> */}
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }
