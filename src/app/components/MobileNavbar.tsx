@@ -97,8 +97,11 @@ export default function MobileNavbar() {
       <div className="flex items-center justify-between p-4">
         <div>
           <h1 className="text-lg font-bold">
-            <Link href="/">
-              🏠 <u>Home</u>
+            <Link
+              className=" px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
+              href="/"
+            >
+              🏠 Home
             </Link>
           </h1>
           {/* Music Play/Pause Button */}

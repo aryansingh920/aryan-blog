@@ -92,8 +92,11 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <div className="flex items-center justify-between p-4">
         <span className={`text-lg font-bold ${isCollapsed && "hidden"}`}>
-          <Link href="/">
-            🏠 <u>Home</u>
+          <Link
+            className=" px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
+            href="/"
+          >
+            🏠 Home
           </Link>
         </span>
         {/* Music play/pause button */}
