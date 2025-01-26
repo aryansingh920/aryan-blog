@@ -1,5 +1,6 @@
 [
   {
+    "sectionId": 1,
     "heading": "Data-Science-Projects",
     "projects": [
       {
@@ -59,12 +60,13 @@
         "author": "Aryan Singh",
         "addedOn": {
           "time": "01:12",
-          "date": "27/12/2025"
+          "date": "27/12/2024"
         }
       }
     ]
   },
   {
+    "sectionId": 2,
     "heading": "Quantitative-Projects",
     "projects": [
       {
@@ -120,6 +122,7 @@
     ]
   },
   {
+    "sectionId": 3,
     "heading": "Networking-Projects",
     "projects": [
       {
@@ -135,6 +138,7 @@
     ]
   },
   {
+    "sectionId": 4,
     "heading": "Gen-AI-Projects",
     "projects": [
       {
@@ -170,6 +174,7 @@
     ]
   },
   {
+    "sectionId": 5,
     "heading": "Mind-Scapes",
     "projects": [
       {
@@ -199,7 +204,7 @@
         "author": "Aryan Singh",
         "addedOn": {
           "time": "01:30",
-          "date": "29/12/2025"
+          "date": "29/12/2024"
         }
       },
       {
@@ -209,7 +214,7 @@
         "author": "Aryan Singh",
         "addedOn": {
           "time": "01:47",
-          "date": "31/12/2025"
+          "date": "31/12/2024"
         }
       },
       {
@@ -260,6 +265,16 @@
         "addedOn": {
           "time": "01:05",
           "date": "09/01/2025"
+        }
+      },
+      {
+        "id": 25,
+        "name": "Beyond-the-Standard-Model-How-Dark-Matter-Supersymmetry-and-Singularities-Could-Unlock-the-Secrets-of-the-Universe",
+        "path": "data/project25",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "23:57",
+          "date": "25/01/2025"
         }
       }
     ]
