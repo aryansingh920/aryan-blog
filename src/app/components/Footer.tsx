@@ -20,12 +20,12 @@ export default function Footer({ isMobile }: { isMobile: boolean }) {
               Aryan Singh`s Portfolio
             </h2>
             <a
-              href="https://aryan-singh20-portfolio.netlify.app"
+              href="https://aryansingh.space"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 transition"
             >
-              aryan-singh20-portfolio.netlify.app
+              aryansingh.space
             </a>
           </div>
 
