@@ -26,7 +26,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           <Link href="https://linktr.ee/aryansingh20?utm_source=linktree_profile_share&ltsid=f474bb58-162c-4640-8a3e-f2e2145d0692">
             <div className="relative">
               <img
-                src="1735963984496.jpeg"
+                src="/1735963984496.jpeg"
                 alt="Banner"
                 className="w-full object-cover rounded-t-lg"
               />
