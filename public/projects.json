@@ -330,7 +330,7 @@
     ]
   },
   {
-    "heading": "Augmented Reality & Virtual Reality",
+    "heading": "Augmented-Reality-Virtual-Reality",
     "projects": [
       {
         "id": 31,
@@ -340,6 +340,16 @@
         "addedOn": {
           "time": "21:17",
           "date": "25/05/2025"
+        }
+      },
+      {
+        "id": 32,
+        "name": "Hand-Tracking",
+        "path": "data/project32",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "21:29",
+          "date": "20/05/2025"
         }
       }
     ]
