@@ -138,6 +138,16 @@
           "time": "21:55",
           "date": "26/01/2025"
         }
+      },
+      {
+        "id": 30,
+        "name": "Copula-Analysis-of-Risk-A-Multivariate-Risk-Analysis-for-VaR-and-CoVaR-using-Copulas-and-DCC-GARCH",
+        "path": "data/project30",
+        "author": "Aryan Singh",
+        "addedOn": {
+          "time": "20:25",
+          "date": "17/05/2025"
+        }
       }
     ]
   },
